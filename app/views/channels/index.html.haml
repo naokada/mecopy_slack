@@ -3,11 +3,35 @@
     .left__info
       %h3 UZEMI
       = fa_icon("angle-down")
-      .left__info__btn
       = fa_icon("bell")
-    .left__channels
-    .left__directs
-    .left__apps
+      .left__info__user
+        = fa_icon("circle")
+        %p naokada
+    .left__threads
+    .left__channels.groups
+      .groups__title
+        %p チャンネル
+        = fa_icon("plus-circle")
+      %ul.groups__list
+        %li
+          %p # general
+        %li
+          %p # random
+    .left__directs.groups
+      .groups__title
+        %p ダイレクトメッセージ
+        = fa_icon("plus-circle")
+      %ul.groups__list
+        %li
+          = fa_icon("circle")
+          %p slackbot
+        %li
+          = fa_icon("circle")
+          %p naokada
+    .left__apps.groups
+      .groups__title
+        %p App
+        = fa_icon("plus-circle")
   .main
     .main__header
     .main__field
