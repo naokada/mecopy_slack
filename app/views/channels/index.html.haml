@@ -1,21 +1,13 @@
-%h1 Listing channels
+.wrapper
+  .left
+    .left__info
+      %h4 UZEMI
+      .left__info__btn
+    .left__channels
+    .left__directs
+    .left__apps
+  .main
+    .main__header
+    .main__field
+    .main__form
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th
-      %th
-      %th
-
-  %tbody
-    - @channels.each do |channel|
-      %tr
-        %td= channel.name
-        %td= link_to 'Show', channel
-        %td= link_to 'Edit', edit_channel_path(channel)
-        %td= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Channel', new_channel_path

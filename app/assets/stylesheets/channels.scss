@@ -1,3 +1,22 @@
-// Place all the styles related to the channels controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+html, body {
+    margin: 0;
+    height:100vh;
+}
+.left {
+    top: 0px  !important;
+    position: absolute;
+    width: 220px;
+    height: 100vh;
+    background-color: $side_bg_cl;
+    color: $side_font_cl;
+    h1, h2, h3, h4, h5, h6 {
+        color: $side_font_h_cl;
+    }
+    &__info {
+        padding: 0 16px;
+    }
+    &__info:hover {
+        background-color: $side_bg_hv_cl;
+    }
+}
+
