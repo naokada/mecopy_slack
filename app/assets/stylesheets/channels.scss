@@ -9,11 +9,22 @@ html, body {
     height: 100vh;
     background-color: $side_bg_cl;
     color: $side_font_cl;
-    h1, h2, h3, h4, h5, h6 {
+    h3 {
         color: $side_font_h_cl;
+        display: inline-block;
     }
     &__info {
         padding: 0 16px;
+        i.fa-bell {
+            position: absolute;
+            left: 180px;
+            top: 15px;
+            font-size: 1.7em;
+            color: $side_font_sd_cl;
+        }
+        i.fa-angle-down {
+            font-size: 1.3em;
+        }
     }
     &__info:hover {
         background-color: $side_bg_hv_cl;
