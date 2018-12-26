@@ -44,7 +44,6 @@ html, body {
     }
 
     .groups {
-        padding: 0 16px;
         ul {
             list-style: none;
             padding: 0;
@@ -57,6 +56,7 @@ html, body {
             font-size: 12pt;
         }
         &__title {
+            padding: 0 16px;
             i {
                 position: absolute;
                 left: 185px;
@@ -67,7 +67,10 @@ html, body {
         &__list  {
             margin: 0;
             li {
-                margin: 5px 0;
+                padding: 5px 16px;
+            }
+            li:hover {
+                background-color: $side_bg_hv_cl;
             }
         }
     }
@@ -310,5 +313,9 @@ html, body {
 
 .flex {
     display: flex;
+}
+
+.hover-white:hover , i.fa-plus-circle:hover, i.fa-bell:hover, i.times-circle:hover {
+    color: white;
 }
 
