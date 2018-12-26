@@ -183,9 +183,12 @@ html, body {
             margin: 0  5px;
         }
     }
-    &__notice {
+    &__notice, &__text {
         display: block;
         margin: 0 5px;
+    }
+    &__text {
+        color: black;
     }
 }
 

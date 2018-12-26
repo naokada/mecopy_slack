@@ -53,13 +53,7 @@
         = fa_icon("info-circle")
         = fa_icon("phone")
     .main__field.flex
-      .message.flex
-        = image_tag('default_prof1.png')
-        .message__contents
-          .message__user
-            %h4 naokada
-            %p.message__time 11:07
-          %p.message__notice #generalに参加しました。
+      = render @messages
       .divider
         %hr.divider__line
         %p.divider__label 昨日

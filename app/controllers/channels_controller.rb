@@ -5,11 +5,14 @@ class ChannelsController < ApplicationController
   # GET /channels.json
   def index
     @channels = Channel.all
+    @messages = Message.all
   end
 
   # GET /channels/1
   # GET /channels/1.json
   def show
+    @channels = Channel.all
+    @messages = Message.all
   end
 
   # GET /channels/new
