@@ -6,6 +6,7 @@ class ChannelsController < ApplicationController
   def index
     @channels = Channel.all
     @messages = Message.all
+    @message = Message.new
   end
 
   # GET /channels/1
