@@ -1,13 +1,21 @@
-= form_for @channel do |f|
-  - if @channel.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@channel.errors.count, "error")} prohibited this channel from being saved:"
-      %ul
-        - @channel.errors.full_messages.each do |message|
-          %li= message
+.main__form
+  = form_for @message, url: {controller: :messages, action: :create}  do |f|
+    - if @message.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@message.errors.count, "error")} prohibited this channel from being saved:"
+        %ul
+          - @message.errors.full_messages.each do |message|
+            %li= message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions
-    = f.submit 'Save'
+
+    .main__form__field
+      %a.file-field
+        = fa_icon("plus")
+      = f.text_field :content, {placeholder: "#general へのメッセージ", "data-behavior": "channel_speaker"}
+      -# %input{placeholder: "#general へのメッセージ"}
+      .main__form__buttons
+        %a.mention-field
+          = fa_icon("at")
+        %a.reaction-field
+          = fa_icon("heart")
+    %button.main__form__send 送信

@@ -57,14 +57,4 @@
       .divider
         %hr.divider__line
         %p.divider__label 昨日
-    .main__form
-      .main__form__field
-        %a.file-field
-          = fa_icon("plus")
-        %input{placeholder: "#general へのメッセージ"}
-        .main__form__buttons
-          %a.mention-field
-            = fa_icon("at")
-          %a.reaction-field
-            = fa_icon("heart")
-      %button.main__form__send 送信
+    = render 'form'
