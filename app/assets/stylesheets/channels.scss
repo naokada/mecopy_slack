@@ -162,11 +162,19 @@ html, body {
 .main__field {
     flex-direction: column-reverse;
     height: calc(100vh - 61px - 66px);
+    flex-wrap: nowrap; /* [1] */
+    overflow-x: auto; /* [1] */
+    -webkit-overflow-scrolling: touch; /* [4] */
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+
+.scroll::-webkit-scrollbar {
+    display: none; }
 
 .message {
     height: 49px;
     padding: 6px 25px;
+    flex: 0 0 auto;
     img {
         height: 36px;
         width: 36px;
