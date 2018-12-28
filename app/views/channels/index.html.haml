@@ -32,29 +32,3 @@
       .groups__title
         %p.hover-white App
         = fa_icon("plus-circle")
-  .main
-    .main__header.header.flex
-      .main__header__left
-        .main__header__left__title
-          %h3 #general
-          %ul
-            %li #{fa_icon("star")}
-            %li #{fa_icon("user")} 1
-            %li #{fa_icon("thumb-tack")} 1
-            %li #{fa_icon("pencil")} トピックの追加
-        .main__header__info
-      .main__header__right.flex
-        = fa_icon("ellipsis-v")
-        = fa_icon("star")
-        = fa_icon("at")
-        .search-box
-          %p #{fa_icon("search")} 検索
-        = fa_icon("cog")
-        = fa_icon("info-circle")
-        = fa_icon("phone")
-    .main__field.flex
-      = render @messages
-      .divider
-        %hr.divider__line
-        %p.divider__label 昨日
-    = render 'form'

@@ -52,7 +52,7 @@ html, body {
             display: inline-block;
             margin: 0;
         }
-        p {
+        * {
             font-size: 12pt;
         }
         &__title {
@@ -68,6 +68,14 @@ html, body {
             margin: 0;
             li {
                 padding: 5px 16px;
+                a {
+                    text-decoration-line: none;
+                    color: inherit;
+                    font-size: inherit;
+                }
+                a:hover {
+                    background-color: inherit;
+                }
             }
             li:hover {
                 background-color: $side_bg_hv_cl;
