@@ -13,10 +13,9 @@
         %p.hover-white チャンネル
         = fa_icon("plus-circle")
       %ul.groups__list
-        %li
-          %p # general
-        %li
-          %p # random
+        - @channels.each do |channel|
+          %li
+            = link_to("# #{channel.name}", channel_path(channel.id))
     .left__directs.groups
       .groups__title
         %p.hover-white ダイレクトメッセージ

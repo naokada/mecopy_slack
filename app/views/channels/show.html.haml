@@ -51,7 +51,7 @@
         = fa_icon("cog")
         = fa_icon("info-circle")
         = fa_icon("phone")
-    .main__field.flex
+    #messages.main__field.flex{"data-channel_id": "#{@channel.id}"}
       = render @messages
       .divider
         %hr.divider__line

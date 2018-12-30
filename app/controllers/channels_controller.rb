@@ -12,7 +12,7 @@ class ChannelsController < ApplicationController
   def show
     @channels = Channel.all
     @channel = Channel.find(params[:id])
-    @messages = @channel.messages
+    @messages = @channel.messages.order('created_at DeSC')
     @message = Message.new
   end
 

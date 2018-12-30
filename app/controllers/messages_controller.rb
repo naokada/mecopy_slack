@@ -1,24 +1,21 @@
 class MessagesController < ApplicationController
 
 	def create
-    @message = Message.new(message_params)
+
+		@message = Message.new(message_params)
+		@channel = Channel.find(params[:channel_id])
 
     respond_to do |format|
-      if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+			if @message.save
+        format.html { redirect_to @channel, notice: 'Message was successfully created.' }
 				format.json { render :show, status: :created, location: @message }
-				redirect_to(controller: "channels", action: "index") and return
       else
-        format.html { render :new }
+        format.html { redirect_to @channel, alert: 'Message was not created.' }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
 		end
-
-		respond_to do |format|
-			format.html #default rendering
-		end
 	end
-	
+
 	private
 		def message_params
 			params.require(:message).permit(:content)
