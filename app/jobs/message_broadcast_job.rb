@@ -2,8 +2,7 @@ class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(message)
-    binding.pry
-    ActionCable.server.broadcast 'channel_channel', message: render_message(message)
+    ActionCable.server.broadcast "room_channel_#{message.channel_id}", message: render_message(message)
   end
 
   private

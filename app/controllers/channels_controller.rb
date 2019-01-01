@@ -1,4 +1,5 @@
 class ChannelsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
 
   # GET /channels
@@ -12,7 +13,7 @@ class ChannelsController < ApplicationController
   def show
     @channels = Channel.all
     @channel = Channel.find(params[:id])
-    @messages = @channel.messages.order('created_at DeSC')
+    @messages = @channel.messages.order('created_at DESC')
     @message = Message.new
   end
 
