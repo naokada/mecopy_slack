@@ -3,6 +3,6 @@
 	.message__contents
 		.message__user
 			%h4 #{message.user.name}
-			%p.message__time #{message.created_at}
+			%p.message__time #{message.created_at.strftime('%H:%M')}
 		%p.message__text #{message.content}
 	-# %p.message__notice #generalに参加しました。
