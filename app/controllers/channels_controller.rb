@@ -13,7 +13,7 @@ class ChannelsController < ApplicationController
   def show
     @channels = Channel.all
     @channel = Channel.find(params[:id])
-    @messages = @channel.messages.order('created_at DESC').group("date(created_at)").includes(:user)
+    @grouped_messages = @channel.messages.includes(:user).order('created_at ASC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     @message = Message.new
   end
 

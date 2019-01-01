@@ -52,8 +52,10 @@
         = fa_icon("info-circle")
         = fa_icon("phone")
     #messages.main__field.flex{"data-channel_id": "#{@channel.id}"}
-      .divider
-        %hr.divider__line
-        %p.divider__label 現在
-      = render @messages
+      - @grouped_messages.keys.each do |date|
+        .divider
+          %hr.divider__line
+          %p.divider__label #{date}
+        - @grouped_messages[date].each do |message|
+          = render partial: "messages/message", locals: { message: message }
     = render 'form'

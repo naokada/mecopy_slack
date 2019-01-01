@@ -5,7 +5,7 @@ document.addEventListener 'turbolinks:load', ->
     disconnected: ->
 
     received: (data) ->
-      $('#messages').prepend data['message']
+      $('#messages').append data['message']
 
     speak: (message)->
       @perform 'speak', message: message

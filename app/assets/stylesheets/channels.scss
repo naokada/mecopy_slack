@@ -168,7 +168,7 @@ html, body {
 }
 
 .main__field {
-    flex-direction: column-reverse;
+    flex-direction: column;
     height: calc(100vh - 61px - 66px);
     flex-wrap: nowrap; /* [1] */
     overflow-x: auto; /* [1] */
@@ -209,7 +209,8 @@ html, body {
 }
 
 .divider {
-    height: 56px;
+    padding-top: 26px;
+    height: 30px;
     &__line {
         padding-top: 28px;
         border-top: 1px solid $border_cl;
@@ -220,8 +221,9 @@ html, body {
     &__label {
         margin: auto;
         background-color: white;
-        width: 26px;
+        width: 90px;
         line-height: 56px;
+        text-align: center;
         position: relative;
         top: -62px;
     }
