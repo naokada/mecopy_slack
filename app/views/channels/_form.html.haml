@@ -2,7 +2,7 @@
   .main__form__field
     %a.file-field
       = fa_icon("plus")
-    %input{placeholder: "#general へのメッセージ", "data-behavior": "channel_speaker"}
+    %input{placeholder: "##{@channel.name} へのメッセージ", "data-behavior": "channel_speaker"}
     .main__form__buttons
       %a.mention-field
         = fa_icon("at")
