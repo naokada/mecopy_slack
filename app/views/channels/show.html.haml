@@ -1,62 +1,9 @@
-.wrapper.flex
-  .left
-    .left__info.header
-      %h3 UZEMI
-      = fa_icon("angle-down")
-      = fa_icon("bell")
-      .left__info__user
-        = fa_icon("circle")
-        %p naokada
-    .left__threads
-    .left__channels.groups
-      .groups__title
-        %p.hover-white チャンネル
-        = fa_icon("plus-circle")
-      %ul.groups__list
-        - @channels.each do |channel|
-          %li
-            = link_to("# #{channel.name}", channel_path(channel.id))
-    .left__directs.groups
-      .groups__title
-        %p.hover-white ダイレクトメッセージ
-        = fa_icon("plus-circle")
-      %ul.groups__list
-        %li
-          = fa_icon("circle")
-          %p slackbot
-        %li
-          = fa_icon("circle")
-          %p naokada
-    .left__apps.groups
-      .groups__title
-        %p.hover-white App
-        = fa_icon("plus-circle")
-  .main
-    .main__header.header.flex
-      .main__header__left
-        .main__header__left__title
-          %h3 #general
-          %ul
-            %li #{fa_icon("star")}
-            %li #{fa_icon("user")} 1
-            %li #{fa_icon("thumb-tack")} 1
-            %li #{fa_icon("pencil")} トピックの追加
-        .main__header__info
-      .main__header__right.flex
-        = fa_icon("ellipsis-v")
-        = fa_icon("star")
-        = fa_icon("at")
-        .search-box
-          %p #{fa_icon("search")} 検索
-        = fa_icon("cog")
-        = fa_icon("info-circle")
-        = fa_icon("phone")
-    = render 'flash'
-    #messages.main__field.flex{"data-channel_id": "#{@channel.id}"}
-      - @grouped_messages.keys.each do |date|
-        .divider
-          %hr.divider__line
-          %p.divider__label #{date}
-        - @grouped_messages[date].each do |message|
-          = render partial: "messages/message", locals: { message: message }
-    = render 'form'
+%p#notice= notice
+
+%p
+  %b Name:
+  = @channel.name
+
+= link_to 'Edit', edit_channel_path(@channel)
+\|
+= link_to 'Back', channels_path
