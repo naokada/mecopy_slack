@@ -1,13 +1,11 @@
-= form_for @channel do |f|
-  - if @channel.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@channel.errors.count, "error")} prohibited this channel from being saved:"
-      %ul
-        - @channel.errors.full_messages.each do |message|
-          %li= message
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions
-    = f.submit 'Save'
+.main__form
+  .main__form__field
+    %a.file-field
+      = fa_icon("plus")
+    %input{placeholder: "#general へのメッセージ", "data-behavior": "channel_speaker"}
+    .main__form__buttons
+      %a.mention-field
+        = fa_icon("at")
+      %a.reaction-field
+        = fa_icon("heart")
+  %button{class: "main__form__send"} 送信
