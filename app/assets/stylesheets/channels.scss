@@ -3,7 +3,6 @@ html, body {
     height:100vh;
     font-family: 'Lato', sans-serif;
     width: 100vw;
-    overflow: hidden;
 }
 .left {
     width: 220px;
@@ -53,7 +52,7 @@ html, body {
             display: inline-block;
             margin: 0;
         }
-        * {
+        p {
             font-size: 12pt;
         }
         &__title {
@@ -69,14 +68,6 @@ html, body {
             margin: 0;
             li {
                 padding: 5px 16px;
-                a {
-                    text-decoration-line: none;
-                    color: inherit;
-                    font-size: inherit;
-                }
-                a:hover {
-                    background-color: inherit;
-                }
             }
             li:hover {
                 background-color: $side_bg_hv_cl;
@@ -169,21 +160,13 @@ html, body {
 }
 
 .main__field {
-    flex-direction: column;
+    flex-direction: column-reverse;
     height: calc(100vh - 61px - 66px);
-    flex-wrap: nowrap; /* [1] */
-    overflow-x: auto; /* [1] */
-    -webkit-overflow-scrolling: touch; /* [4] */
-    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
-
-.scroll::-webkit-scrollbar {
-    display: none; }
 
 .message {
     height: 49px;
     padding: 6px 25px;
-    flex: 0 0 auto;
     img {
         height: 36px;
         width: 36px;
@@ -200,18 +183,14 @@ html, body {
             margin: 0  5px;
         }
     }
-    &__notice, &__text {
+    &__notice {
         display: block;
         margin: 0 5px;
-    }
-    &__text {
-        color: black;
     }
 }
 
 .divider {
-    padding-top: 26px;
-    height: 30px;
+    height: 56px;
     &__line {
         padding-top: 28px;
         border-top: 1px solid $border_cl;
@@ -222,9 +201,8 @@ html, body {
     &__label {
         margin: auto;
         background-color: white;
-        width: 90px;
+        width: 26px;
         line-height: 56px;
-        text-align: center;
         position: relative;
         top: -62px;
     }
@@ -339,9 +317,5 @@ html, body {
 
 .hover-white:hover , i.fa-plus-circle:hover, i.fa-bell:hover, i.times-circle:hover {
     color: white;
-}
-
-.hidden {
-    display: none;
 }
 
