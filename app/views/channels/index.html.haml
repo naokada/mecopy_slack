@@ -13,10 +13,9 @@
         %p.hover-white チャンネル
         = fa_icon("plus-circle")
       %ul.groups__list
-        %li
-          %p # general
-        %li
-          %p # random
+        - @channels.each do |channel|
+          %li
+            = link_to("# #{channel.name}", channel_path(channel.id))
     .left__directs.groups
       .groups__title
         %p.hover-white ダイレクトメッセージ
@@ -32,45 +31,3 @@
       .groups__title
         %p.hover-white App
         = fa_icon("plus-circle")
-  .main
-    .main__header.header.flex
-      .main__header__left
-        .main__header__left__title
-          %h3 #general
-          %ul
-            %li #{fa_icon("star")}
-            %li #{fa_icon("user")} 1
-            %li #{fa_icon("thumb-tack")} 1
-            %li #{fa_icon("pencil")} トピックの追加
-        .main__header__info
-      .main__header__right.flex
-        = fa_icon("ellipsis-v")
-        = fa_icon("star")
-        = fa_icon("at")
-        .search-box
-          %p #{fa_icon("search")} 検索
-        = fa_icon("cog")
-        = fa_icon("info-circle")
-        = fa_icon("phone")
-    .main__field.flex
-      .message.flex
-        = image_tag('default_prof1.png')
-        .message__contents
-          .message__user
-            %h4 naokada
-            %p.message__time 11:07
-          %p.message__notice #generalに参加しました。
-      .divider
-        %hr.divider__line
-        %p.divider__label 昨日
-    .main__form
-      .main__form__field
-        %a.file-field
-          = fa_icon("plus")
-        %input{placeholder: "#general へのメッセージ"}
-        .main__form__buttons
-          %a.mention-field
-            = fa_icon("at")
-          %a.reaction-field
-            = fa_icon("heart")
-      %button.main__form__send 送信

@@ -1,4 +1,5 @@
 class ChannelsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
 
   # GET /channels
@@ -10,6 +11,10 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
+    @channels = Channel.all
+    @channel = Channel.find(params[:id])
+    @grouped_messages = @channel.messages.includes(:user).order('created_at ASC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
+    @message = Message.new
   end
 
   # GET /channels/new
