@@ -51,6 +51,7 @@
         = fa_icon("cog")
         = fa_icon("info-circle")
         = fa_icon("phone")
+    = render 'flash'
     #messages.main__field.flex{"data-channel_id": "#{@channel.id}"}
       - @grouped_messages.keys.each do |date|
         .divider
