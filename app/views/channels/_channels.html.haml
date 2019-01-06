@@ -1,0 +1,26 @@
+.channels_wrapper.hidden
+	%button.exit-btn
+		= fa_icon("times")
+		%p Esc
+	.contents
+		.contents__info
+			= fa_icon("info-circle")
+			%a チャンネルについて...
+		.contents__header.flex
+			%h1 チャンネル一覧
+			%button.btn チャンネルを作成する
+		.contents__search.search-box
+			%input{type: "text", placeholder: "チャンネルを検索する"}
+			= fa_icon("search")
+		.contents__list
+			%ul
+				%li
+					%h4.contents__list__title あなたが参加しているチャンネル
+				- @channels.each do |channel|
+					%li.vertical_centerd_flex.contents__list__items
+						%h5
+							%span #
+							#{channel.name}
+						-# %p.contents__list__details
+						%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
+

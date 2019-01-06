@@ -9,7 +9,7 @@
         %p naokada
     .left__threads
     .left__channels.groups
-      .groups__title
+      #channels.groups__title
         %p.hover-white チャンネル
         = fa_icon("plus-circle")
       %ul.groups__list
@@ -17,7 +17,7 @@
           %li
             = link_to("# #{channel.name}", channel_path(channel.id))
     .left__directs.groups
-      .groups__title
+      #directs.groups__title
         %p.hover-white ダイレクトメッセージ
         = fa_icon("plus-circle")
       %ul.groups__list
@@ -47,7 +47,8 @@
         = fa_icon("star")
         = fa_icon("at")
         .search-box
-          %p #{fa_icon("search")} 検索
+          %input{type: "text", placeholder: "検索"}
+          = fa_icon("search")
         = fa_icon("cog")
         = fa_icon("info-circle")
         = fa_icon("phone")
@@ -60,3 +61,4 @@
         - @grouped_messages[date].each do |message|
           = render partial: "messages/message", locals: { message: message }
     = render 'form'
+= render 'channels'
