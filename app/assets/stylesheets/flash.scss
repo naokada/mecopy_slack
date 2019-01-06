@@ -6,7 +6,7 @@
 }
 
 .flash {
-    width: calc(100vh - 220px);
+    width: calc(100vw - 240px);
     height: 26px;
     color: white;
     position: fixed;
@@ -21,6 +21,7 @@
             display: inline-block;
             height: 25px;
             color: white;
+            box-sizing: border-box;
         }
         button {
             border: none;
@@ -28,8 +29,9 @@
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
             margin-right: 10px;
+            outline: none;
         }
         p {
-            width: calc(100vh - 345px);
+            width: calc(100vw - 325px);
         }
 }

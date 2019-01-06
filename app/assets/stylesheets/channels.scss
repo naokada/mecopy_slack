@@ -172,7 +172,7 @@ html, body {
 }
 
 .main__field {
-    flex-direction: column;
+    flex-direction: column-reverse;
     height: calc(100vh - 61px - 66px);
     flex-wrap: nowrap; /* [1] */
     overflow-x: auto; /* [1] */

@@ -5,7 +5,7 @@ document.addEventListener 'turbolinks:load', ->
     disconnected: ->
 
     received: (data) ->
-      $('#messages').append data['message']
+      $('#messages').prepend data['message']
       $('#notice p').html("未読のメッセージがあります")
       if ($('#notice')[0].classList.contains('hidden'))
         $('#notice').removeClass("hidden")

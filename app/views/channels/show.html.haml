@@ -35,7 +35,7 @@
     .main__header.header.flex
       .main__header__left
         .main__header__left__title
-          %h3 #general
+          %h3 ##{@channel.name}
           %ul
             %li #{fa_icon("star")}
             %li #{fa_icon("user")} 1
@@ -55,10 +55,10 @@
     = render 'flash'
     #messages.main__field.flex{"data-channel_id": "#{@channel.id}"}
       - @grouped_messages.keys.each do |date|
+        - @grouped_messages[date].each do |message|
+          = render partial: "messages/message", locals: { message: message }
         .divider
           %hr.divider__line
           %p.divider__label #{date}
-        - @grouped_messages[date].each do |message|
-          = render partial: "messages/message", locals: { message: message }
     = render 'form'
 = render 'channels'
