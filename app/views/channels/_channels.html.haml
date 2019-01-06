@@ -1,4 +1,4 @@
-.channels_wrapper.hidden
+#channels_wrapper.hidden
 	%button.exit-btn
 		= fa_icon("times")
 		%p Esc
@@ -8,7 +8,8 @@
 			%a チャンネルについて...
 		.contents__header.flex
 			%h1 チャンネル一覧
-			%button.btn チャンネルを作成する
+			-# %button.btn チャンネルを作成する
+			= button_to "チャンネルを作成する", new_channel_path, class: "btn", method: "get"
 		.contents__search.search-box
 			%input{type: "text", placeholder: "チャンネルを検索する"}
 			= fa_icon("search")

@@ -2,6 +2,12 @@ document.addEventListener('turbolinks:load', function() {
     scroll();
     $("#messages").on('scroll', isScrolledBottom);
     $("#notice button").on('click', scroll);
+    $("#channels").on('click', function() {
+        removeHidden($("#channels_wrapper")[0]);
+    });
+    $(".exit-btn").on('click', function() {
+        location.reload();
+    });
 })
 
 function scroll() {
@@ -23,5 +29,11 @@ function isScrolledBottom() {
 function addHidden(dom) {
     if (!(dom.classList.contains('hidden'))) {
         dom.classList.add("hidden");
+    }
+}
+
+function removeHidden(dom) {
+    if (dom.classList.contains('hidden')) {
+        dom.classList.remove("hidden");
     }
 }

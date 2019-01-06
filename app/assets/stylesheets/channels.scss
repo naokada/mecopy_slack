@@ -140,7 +140,11 @@ html, body {
                 font-size: 1.5em;
                 margin-right:20px;
             }
+            .search-box i {
+                left: -142px;
+            }
         }
+
     }
 }
 
@@ -153,7 +157,7 @@ html, body {
         margin: 0;
         font-size: 1.1em;
         position: relative;
-        top: -72px;
+        top: 0;
         left: 0;
         padding: 9px 8px;
     }
@@ -325,7 +329,7 @@ html, body {
     }
 }
 
-.channels_wrapper, .new_channel_wrapper {
+#channels_wrapper, .new_channel_wrapper {
     position: absolute;
     top: 0;
     left:0;
@@ -514,6 +518,7 @@ html, body {
     border: none;
     font-size: 11pt;
     padding: 8px 14px 9px;
+    outline:none;
 }
 
 .btn:hover {
