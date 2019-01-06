@@ -22,11 +22,9 @@
         = fa_icon("plus-circle")
       %ul.groups__list
         %li
-          = fa_icon("circle")
-          %p slackbot
+          %a #{fa_icon("circle")} slackbot
         %li
-          = fa_icon("circle")
-          %p naokada
+          %a #{fa_icon("circle")} naokada
     .left__apps.groups
       .groups__title
         %p.hover-white App
@@ -46,9 +44,9 @@
         = fa_icon("ellipsis-v")
         = fa_icon("star")
         = fa_icon("at")
-        .search-box
-          %input{type: "text", placeholder: "検索"}
+        .search-box-btn
           = fa_icon("search")
+          %p 検索
         = fa_icon("cog")
         = fa_icon("info-circle")
         = fa_icon("phone")
