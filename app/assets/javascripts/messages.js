@@ -1,5 +1,7 @@
 document.addEventListener('turbolinks:load', function() {
-    scroll();
+    if (($("#messages").length)) {
+        scroll();
+    }
     $("#messages").on('scroll', isScrolledBottom);
     $("#notice button").on('click', scroll);
     $("#channels").on('click', function() {

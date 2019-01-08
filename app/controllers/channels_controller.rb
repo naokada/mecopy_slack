@@ -22,6 +22,13 @@ class ChannelsController < ApplicationController
     @channel = Channel.new
   end
 
+  def search
+    @users = User.where('name LIKE(?)', "%#{params[:keyword]}%")
+    respond_to do |format|
+      format.json { render 'new', json: @users }
+    end
+  end
+
   # GET /channels/1/edit
   def edit
   end
@@ -74,6 +81,6 @@ class ChannelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def channel_params
-      params.require(:channel).permit(:name)
+      params.require(:channel).permit(:name, {user_ids:[]})
     end
 end

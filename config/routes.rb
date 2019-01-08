@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   resources :channels do
     resources :messages, only: [:create]
+    collection do
+      get :search
+    end
   end
   root 'channels#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

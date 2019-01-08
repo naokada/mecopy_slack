@@ -13,6 +13,14 @@
 				.search-box
 					= f.text_field :name, placeholder: "例:営業"
 					= fa_icon("hashtag")
+			.field
+				= f.label :users, "招待の送信先:(任意)"
+				%br/
+				.search-box
+					%input{id:'user-search-field', placeholder: '名前で検索する', type:'text' }
+					%p このチャンネルに追加したい人(最大1000名)を選んでください。
+				#user-search-result
+				#user-added
 			.flex
 				= f.submit "チャンネルを作成する", class: "btn"
 				%button.btn.cancel-btn キャンセル
