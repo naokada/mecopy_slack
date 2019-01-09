@@ -1,22 +1,27 @@
 $(document).on('turbolinks:load',function() {
     // let defalutDom = $("#user-search-result")[0];
+    let added_users = [];
 
     function buildHtmlUser(user) {
-        var html = `<div  data-behavior="add_user" data-user-id="${ user.id }" data-user-name="${ user.name }">
-      <p>${ user.name }</p>
+        let html = `<div  data-behavior="add_user" data-user-id="${ user.id }" data-user-name="${ user.name }">
+        <img src="/assets/default_prof1-8b14ffdea934dd66890d13138fb941feeaf79a96282d2301a69545a1cb5b5ebf.png">
+        <p>${ user.name }</p>
     </div>`
         return html;
     }
     function buildHtmlAddedUser(user) {
-    var html = `<div  data-behavior="remove_user">
+    let html = `<div  data-behavior="remove_user">
     <input name='channel[user_ids][]' type='hidden' value='${ user.data('user-id') }'>
-    <p>${ user.data('user-name') }</p></div>`
+    <img src="/assets/default_prof1-8b14ffdea934dd66890d13138fb941feeaf79a96282d2301a69545a1cb5b5ebf.png">
+    <p>${ user.data('user-name') }</p>
+    <i class="fa fa-times"></i>
+    </div>`
     return html;
     }
 
     $("#user-search-field").on("keyup", function(e) {
     e.preventDefault();
-    var input = $.trim($(this).val());
+    let input = $.trim($(this).val());
 
     $.ajax({
       type: 'GET',
@@ -28,18 +33,24 @@ $(document).on('turbolinks:load',function() {
     })
 
     .done(function(data) {
-        console.log(data);
-      var search_list = $("#user-search-result")
+      let search_list = $("#user-search-result")
       search_list.empty();
 
       if (input.length !== 0) {
-        var users = $(data);
-        var users = Object.values(users);
+        let users = $(data);
+        users = Object.values(users);
+        let count = 0;
         users.pop();
         users.forEach(function(user) {
-          var html = buildHtmlUser(user);
-          search_list.append(html);
+          if (added_users.indexOf(user["id"]) == -1){
+            let html = buildHtmlUser(user);
+            search_list.append(html);
+            count++;
+          }
         });
+        if (count > 0) {
+          removeHidden($("#user-search-result")[0]);
+        }
       }
     })
     .fail(function() {
@@ -48,23 +59,40 @@ $(document).on('turbolinks:load',function() {
   });
 
   $("#user-search-result").on("click",'[data-behavior~=add_user]', function() {
-    var added_list = $("#user-added")
-    var user = $(this);
-    console.log(user[0]);
-    var html = buildHtmlAddedUser(user);
+    let added_list = $("#user-added")
+    let user = $(this);
+    let html = buildHtmlAddedUser(user);
+    added_users.push(user.data("user-id"));
     added_list.append(html);
+    user.html("").css({'border':'none'});
+    if (isResultEmpty()) {
+      addHidden($("#user-search-result")[0]);
+    }
   });
 
   $("#user-added").on("click", '[data-behavior~=remove_user]', function() {
-    var user = $(this).parent();
+    let user = $(this);
+
+    added_users = added_users.filter(function( item ) {
+      return item != user.children("input").val();
+    });
+
     user.html("").css({'border':'none'});
   });
   $("a.user-search-remove").on("click", function() {
-    var user = $(this).parent();
+    let user = $(this).parent();
     user.html("").css({'border':'none'});
   });
 
-//   function setDefault(dom) {
-      
-//   }
 });
+
+function isResultEmpty() {
+  let children = $("#user-search-result").children();
+  let result = true;
+  children.each(function(i, child) {
+    if (child.style.border != "none") {
+      result = false;
+    }
+  });
+  return result;
+}
