@@ -7,6 +7,7 @@ document.addEventListener('turbolinks:load', function() {
     $("#channels").on('click', function() {
         removeHidden($("#channels_wrapper")[0]);
     });
+    $(".back-btn").on('click', goBack);
     $(".exit-btn").on('click', function() {
         location.reload();
     });
@@ -37,5 +38,22 @@ function addHidden(dom) {
 function removeHidden(dom) {
     if (dom.classList.contains('hidden')) {
         dom.classList.remove("hidden");
+    }
+}
+
+function goBack() {
+    let ref = document.referrer;             // リファラ情報を得る
+    let hereHost = window.location.hostname; // 現在ページのホスト(ドメイン)名を得る
+    
+    // ホスト名が含まれるか探す正規表現を作る(大文字・小文字を区別しない)
+    let sStr = "^https?://" + hereHost;
+    let rExp = new RegExp( sStr, "i" );
+    
+    if( ref.match( rExp ) ) {
+        window.history.back(-1);
+        return false;
+    }
+    else {
+        location.href = '../';
     }
 }
