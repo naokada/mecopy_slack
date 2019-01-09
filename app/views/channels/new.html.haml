@@ -16,12 +16,7 @@
 			.field
 				= f.label :users, "招待の送信先:(任意)"
 				%br/
-				.user-search
-					.user-search__field.flex
-						#user-added.flex
-						%input{id:'user-search-field', placeholder: '名前で検索する', type:'text' }
-					%p このチャンネルに追加したい人(最大1000名)を選んでください。
-					#user-search-result.user-search__result.hidden
+				= render "user-search"
 			.flex
 				= f.submit "チャンネルを作成する", class: "btn"
 				%button.btn.cancel-btn キャンセル
