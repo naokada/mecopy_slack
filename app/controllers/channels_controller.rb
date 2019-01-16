@@ -30,8 +30,8 @@ class ChannelsController < ApplicationController
   end
 
   def participate
-    @channel = Channel.find(params[:channel])
-    if (!@channel.users.exists?(@user.id))
+    @channel = Channel.find(participate_params[:channel_id])
+    if (!@channel.users.exists?(current_user.id))
       @channel_user = ChannelUser.new(channel_id: @channel.id, user_id:current_user.id)
       respond_to do |format|
         if @channel_user.save
@@ -98,6 +98,10 @@ class ChannelsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def channel_params
       params.require(:channel).permit(:name, {user_ids:[]})
+    end
+
+    def participate_params
+      params.permit(:channel_id)
     end
 
 end
