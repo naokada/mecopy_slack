@@ -1,0 +1,6 @@
+- if (!@channel.users.exists?(current_user.id))
+  #participation_wrapper
+    %p.strong You are viewing ##{@channel.name}
+    %p Created on #{@channel.created_at.strftime('%Y/%m/%d')}
+  .participation__buttons.horizontal_centered_flex
+    = button_to "Join Channel", participate_channels_path, class: "btn", method: "post"
