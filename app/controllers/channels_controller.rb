@@ -29,6 +29,22 @@ class ChannelsController < ApplicationController
     end
   end
 
+  def participate
+    @channel = Channel.find(params[:channel])
+    if (!@channel.users.exists?(@user.id))
+      @channel_user = ChannelUser.new(channel_id: @channel.id, user_id:current_user.id)
+      respond_to do |format|
+        if @channel_user.save
+          format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
+          format.json { render :show, status: :created, location: @channel }
+        else
+          format.html { render :new }
+          format.json { render json: @channel.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   # GET /channels/1/edit
   def edit
   end
@@ -83,4 +99,5 @@ class ChannelsController < ApplicationController
     def channel_params
       params.require(:channel).permit(:name, {user_ids:[]})
     end
+
 end

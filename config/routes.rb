@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
     collection do
       get :search
+      post :participate
     end
   end
   root 'channels#index'
