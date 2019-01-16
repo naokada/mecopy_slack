@@ -13,8 +13,12 @@ class ChannelsController < ApplicationController
   def show
     @channels = Channel.all
     @channel = Channel.find(params[:id])
-    @grouped_messages = @channel.messages.includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
+    # @grouped_messages = @channel.messages.includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
+    grouped_contents = @channel.feed_contents.order('created_at DESC')
+    grouped_contents_included = grouped_contents.map(&:content)
+    @groupd_contents = grouped_contents_included.group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     @message = Message.new
+    binding.pry
   end
 
   # GET /channels/new
