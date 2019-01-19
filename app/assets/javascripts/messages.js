@@ -7,6 +7,14 @@ document.addEventListener('turbolinks:load', function() {
     $("#channels").on('click', function() {
         removeHidden($("#channels_wrapper")[0]);
     });
+    $(".nav").on('click', function(){
+        switchNav(this);
+        event.stopPropagation();
+        $(document).on('click', function(){
+            switchNav($(".selected_nav")[0]);
+            $(document).off('click');
+        });
+    });
     $(".back-btn").on('click', goBack);
     $(".exit-btn").on('click', function() {
         location.reload();
@@ -55,5 +63,14 @@ function goBack() {
     }
     else {
         location.href = '../';
+    }
+}
+
+function switchNav(dom) {
+    console.log(dom);
+    if (!(dom.classList.contains('selected_nav'))) {
+        dom.classList.add('selected_nav');
+    } else {
+        dom.classList.remove('selected_nav');
     }
 }

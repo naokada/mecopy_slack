@@ -38,20 +38,43 @@
       .main__header__left
         .main__header__left__title
           %h3 ##{@channel.name}
-          %ul
+          %ul.channel_small_info_list
             %li #{fa_icon("star")}
             %li #{fa_icon("user")} 1
             %li #{fa_icon("thumb-tack")} 1
             %li #{fa_icon("pencil")} トピックの追加
         .main__header__info
       .main__header__right.flex
-        = fa_icon("ellipsis-v")
+        .nav
+          = fa_icon("ellipsis-v")
         = fa_icon("star")
         = fa_icon("at")
         .search-box-btn
           = fa_icon("search")
           %p 検索
-        = fa_icon("cog")
+        .nav
+          = fa_icon("cog")
+          .nav__contents
+            %ul
+              %li.item
+                %a Jump to date...
+              %li.item
+                %a Invite new members to join...
+              %li.item
+                %a View channel details
+              %li.item
+                %a Addtional options...
+              %li.list_divider
+              %li.item
+                %a Notification preferences...
+              %li.item
+                %a Mute ##{@channel.name}
+              %li.list_divider
+              %li.item
+                %a Add an app
+              %li.list_divider
+              %li.item
+                = link_to "Leave ##{@channel.name}"
         = fa_icon("info-circle")
         = fa_icon("phone")
     = render 'flash'
@@ -60,11 +83,8 @@
         - @grouped_contents[date].each do |content|
           - if content.content_type == "Message"
             = render partial: "messages/message", locals: { message: content.content }
-            -# = content.content.user.name
-            -#  = content
           - elsif content.content_type == "ChannelUser"
             = render partial: "participation", locals: { channel_user: content.content }
-            -# =  content.content_type
         .divider
           %hr.divider__line
           %p.divider__label #{date}

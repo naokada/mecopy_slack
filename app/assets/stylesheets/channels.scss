@@ -112,6 +112,7 @@ html, body {
     height: 100vh;
     width: calc(100vw - 220px);
     color: $font_cl;
+    position: relative;
     h3 {
         color: black;
     }
@@ -124,7 +125,7 @@ html, body {
         h3 {
             margin-bottom: 5px;
         }
-        ul {
+        ul.channel_small_info_list {
             padding: 0;
             list-style: none;
             height: 18px;
@@ -134,13 +135,13 @@ html, body {
                 display: inline-block;
                 padding: 0 5px;
             }
-        }
-        li+ li {
-            border-left: 1px solid $font_cl;
+            li+ li {
+                border-left: 1px solid $font_cl;
+            }
         }
         &__right {
             flex-direction: row-reverse;
-            * {
+            > * {
                 display: inline-block;
                 line-height: 61px;
                 font-size: 1.5em;
@@ -197,7 +198,7 @@ html, body {
     display: none; }
 
 .message {
-    height: 49px;
+    height: 61px;
     padding: 6px 25px;
     flex: 0 0 auto;
     img {
@@ -227,7 +228,7 @@ html, body {
 
 .divider {
     padding-top: 26px;
-    height: 30px;
+    height: 56px;
     &__line {
         padding-top: 28px;
         border-top: 1px solid $border_cl;
@@ -250,19 +251,18 @@ html, body {
     position: fixed;
     z-index: 1;
     height: 66px;
-    width: 90%;
-    left: 240px;
+    left: 20px;
     position: absolute;
+    width: calc(100vw - 220px - 40px );
     &__field {
         border: 2px solid $field_border_cl;
         margin-bottom: 22px;
         height: 42px;
-        width: calc(100vw - 220px - 60px - 78px);
+        width: 100%;
         padding-left: 42px;
         border-radius: 5px;
         display: inline-block;
         input {
-            width: calc(100% - 70px);
             border: none;
             background: none;
             -webkit-appearance:none;
@@ -309,6 +309,8 @@ html, body {
     &__buttons {
         display: inline-block;
         width: 50px;
+        position: absolute;
+        right: 5px;
         i {
             line-height: 40px;
             font-size: 1.5em;
@@ -328,13 +330,6 @@ html, body {
         i {
             color: pink;
         }
-    }
-    &__send {
-        margin-right: 10px;
-        margin-left: 5px;
-        position: absolute;
-        top: 0px;
-        width: 58px;
     }
 }
 
@@ -667,6 +662,65 @@ p.strong {
     margin-bottom: 8px !important;
 }
 
+.nav {
+    width: 16px;
+    &__contents {
+        // min-width: 200px;
+        // max-width: 360px;
+        width: 240px;
+        border: 1px solid $border_cl;
+        border-radius: 6px;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 4px 12px 0 rgba(0,0,0,.12);
+        display: none;
+        ul {
+            margin: 12px 0;
+            padding: 0;
+            list-style-type: none;
+            height: 300px;
+            li {
+                width: 100%;
+            }
+            li.item:hover {
+                background-color: $link_hover_cl;
+            }
+            li.item {
+                padding: 0 24px;
+                font-size: 10pt;
+                a {
+                    text-decoration: none;
+                    line-height: 28px;
+                    color: $font_d_cl;
+                }
+                a:hover {
+                    background-color: inherit;
+                    color: white;
+                }
+            }
+        }
+        li.list_divider {
+            border-bottom: 1px solid $border_cl;
+            margin: 8px 0 7px;
+        }
+    }
+    > i {
+        font-size: 1.1em;
+        margin: 0px;
+
+    }
+    > i:hover {
+        color: $link_cl;
+    }
+}
+
+.selected_nav {
+    .nav__contents {
+        display: block;
+    }
+    > i {
+        color: $link_cl;
+    }
+}
+
 .btn:hover {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
@@ -708,6 +762,10 @@ p.strong {
 
 .hidden {
     display: none;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 
