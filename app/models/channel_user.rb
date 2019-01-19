@@ -10,6 +10,6 @@ class ChannelUser < ApplicationRecord
 
   private
   def create_feed_content
-    self.feed_content = FeedContent.create(channel_id: question.channel_id, updated_at: updated_at)
+    self.feed_content = FeedContent.create(channel_id: self.channel_id, updated_at: updated_at)
   end
 end

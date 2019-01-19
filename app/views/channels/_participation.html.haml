@@ -1,0 +1,8 @@
+.message.flex
+	= image_tag('default_prof1.png')
+	.message__contents
+		.message__user
+			%h4 #{channel_user.user.name}
+			%p.message__time #{channel_user.created_at.strftime('%H:%M')}
+		%p.message__notice ##{channel_user.channel.name} に参加しました。
+	-# %p.message__notice #generalに参加しました。

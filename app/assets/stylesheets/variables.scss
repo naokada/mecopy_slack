@@ -15,13 +15,16 @@ $font_r_cl: rgb(155, 155, 155);
 $font_d_cl: #1d1c1d;
 
 // side
-$side_bg_cl: #4D394B;
+$side_bg_cl: #39133E;
 $side_bg_hv_cl: #3E303C;
-$side_second_cl: #4C9689;
+// old color theme
+// $side_second_cl: #4C9689;
+$side_second_cl: #55A97A; // new color theme
 $side_second_r_cl: #56B68B;
 $side_font_cl: rgb(185, 180, 185);
 $side_font_sd_cl: rgb(190, 165, 187);
 $side_font_h_cl: #FFFFFF;
+$side_selected_cl: #2B649E;
 
 // flash
 $sky_cl: #009CE5;

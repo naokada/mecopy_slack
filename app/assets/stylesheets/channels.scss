@@ -58,10 +58,13 @@ html, body {
         }
         &__title {
             padding: 0 16px;
+            position: relative;
+            height: 26px;
+            box-sizing: border-box;
             i {
                 position: absolute;
                 left: 185px;
-                font-size: 1.4em;
+                font-size: 1.2em;
                 color: $side_font_sd_cl;
             }
         }
@@ -695,6 +698,11 @@ p.strong {
 }
 
 .hover-white:hover , i.fa-plus-circle:hover, i.fa-bell:hover, i.times-circle:hover {
+    color: white;
+}
+
+.selected_channel, .selected_channel:hover {
+    background-color: $side_selected_cl !important;
     color: white;
 }
 

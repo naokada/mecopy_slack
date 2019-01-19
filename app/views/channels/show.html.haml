@@ -14,8 +14,12 @@
         = fa_icon("plus-circle")
       %ul.groups__list
         - @channels.each do |channel|
-          %li
-            = link_to("# #{channel.name}", channel_path(channel.id))
+          - if channel.id == @channel.id
+            %li.selected_channel
+              = link_to("# #{channel.name}", channel_path(channel.id))
+          - else
+            %li
+              = link_to("# #{channel.name}", channel_path(channel.id))
     .left__directs.groups
       #directs.groups__title
         %p.hover-white ダイレクトメッセージ
@@ -52,9 +56,15 @@
         = fa_icon("phone")
     = render 'flash'
     #messages.main__field.flex{"data-channel_id": "#{@channel.id}"}
-      - @grouped_messages.keys.each do |date|
-        - @grouped_messages[date].each do |message|
-          = render partial: "messages/message", locals: { message: message }
+      - @grouped_contents.keys.each do |date|
+        - @grouped_contents[date].each do |content|
+          - if content.content_type == "Message"
+            = render partial: "messages/message", locals: { message: content.content }
+            -# = content.content.user.name
+            -#  = content
+          - elsif content.content_type == "ChannelUser"
+            = render partial: "participation", locals: { channel_user: content.content }
+            -# =  content.content_type
         .divider
           %hr.divider__line
           %p.divider__label #{date}
