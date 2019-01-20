@@ -7,6 +7,7 @@ html, body {
 }
 .left {
     width: 220px;
+    min-width: 220px;
     height: 100vh;
     background-color: $side_bg_cl;
     color: $side_font_cl;
@@ -110,6 +111,7 @@ html, body {
 .main {
     height: 100vh;
     width: calc(100vw - 220px);
+    min-width: 550px;
     color: $font_cl;
     position: relative;
     h3 {
@@ -707,6 +709,32 @@ p.strong {
     }
     > i {
         color: $link_cl;
+    }
+}
+
+.channel_intro {
+    color: $font_d_cl;
+    margin: 48px 32px 16px 16px;
+    h1 {
+        margin-bottom: 8px;
+    }
+    ul {
+        padding: 0;
+        list-style: none;
+        height: 18px;
+        margin: 0;
+        overflow: hidden;
+        li {
+            display: inline-block;
+            margin-right: 16px;
+            a {
+                color: $link_cl;
+                cursor: pointer;
+            }
+            a:hover {
+                background-color: inherit;
+            }
+        }
     }
 }
 

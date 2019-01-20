@@ -91,6 +91,18 @@
         .divider
           %hr.divider__line
           %p.divider__label #{date}
+      .channel_intro
+        %h1 # #{@channel.name}
+        %p
+          This channel created on #{@channel.created_at.strftime('%Y/%m/%d')}. This is the very beginning of the 
+          %strong ##{@channel.name}
+        %ul
+          %li
+            %a #{fa_icon("pencil")} Set a purpose
+          %li
+            %a #{fa_icon("plus")} Add an app
+          %li
+            %a #{fa_icon("user")} Invite others to this channel
     = render 'form'
     = render 'participate'
 = render 'channels'
