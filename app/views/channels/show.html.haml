@@ -62,20 +62,22 @@
                 %a Invite new members to join...
               %li.item
                 %a View channel details
-              %li.item
-                %a Addtional options...
-              %li.list_divider
-              %li.item
-                %a Notification preferences...
-              %li.item
-                %a Mute ##{@channel.name}
-              %li.list_divider
-              %li.item
-                %a Add an app
-              %li.list_divider
-              %li.item
-                = button_to "Leave ##{@channel.name}", unparticipate_channel_path(@channel.id), method: :delete, class: "button-to-link"
-                -# = link_to("Leave ##{@channel.name}", unparticipate_channel_path(@channel.id), method: :delete)
+              - if (@channel.users.exists?(current_user.id))
+                %li.item
+                  %a Addtional options...
+              - if (@channel.users.exists?(current_user.id))
+                %li.list_divider
+                %li.item
+                  %a Notification preferences...
+                %li.item
+                  %a Mute ##{@channel.name}
+                %li.list_divider
+                %li.item
+                  %a Add an app
+              - if (@channel.users.exists?(current_user.id))
+                %li.list_divider
+                %li.item
+                  = button_to "Leave ##{@channel.name}", unparticipate_channel_path(@channel.id), method: :delete, class: "button-to-link"
         = fa_icon("info-circle")
         = fa_icon("phone")
     = render 'flash'
