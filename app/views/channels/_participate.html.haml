@@ -5,7 +5,7 @@
       %strong
         \##{@channel.name}
     %p Created on #{@channel.created_at.strftime('%Y/%m/%d')}
-    = form_with url: participate_channels_path, method: "post" do |f|
+    = form_with url: participate_channel_path, method: "post" do |f|
       = f.hidden_field :channel_id, value: @channel.id
       .participation__buttons.horizontal_centered_flex
         = f.submit "Join Channel", class: "btn"

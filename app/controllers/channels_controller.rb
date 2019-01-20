@@ -49,6 +49,17 @@ class ChannelsController < ApplicationController
     end
   end
 
+  def unparticipate
+    # binding.pry
+    @channel = Channel.find(params[:id])
+    @channel_user = ChannelUser.where(user_id: current_user.id, channel_id: @channel.id)
+    ChannelUser.destroy(@channel_user.ids[0])
+    respond_to do |format|
+      format.html { redirect_to channels_path}
+      format.json { head :no_content }
+    end
+  end
+
   # GET /channels/1/edit
   def edit
   end

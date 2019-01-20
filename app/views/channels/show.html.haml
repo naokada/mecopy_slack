@@ -74,7 +74,8 @@
                 %a Add an app
               %li.list_divider
               %li.item
-                = link_to "Leave ##{@channel.name}"
+                = button_to "Leave ##{@channel.name}", unparticipate_channel_path(@channel.id), method: :delete, class: "button-to-link"
+                -# = link_to("Leave ##{@channel.name}", unparticipate_channel_path(@channel.id), method: :delete)
         = fa_icon("info-circle")
         = fa_icon("phone")
     = render 'flash'

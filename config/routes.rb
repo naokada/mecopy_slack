@@ -5,7 +5,12 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
     collection do
       get :search
+    end
+    member do
+      # post 'channels/participate/:channel_id', to: :participate
+      # delete 'channels/participate/:channel_etunid', to: :unparticipate
       post :participate
+      delete :unparticipate
     end
   end
   root 'channels#index'
