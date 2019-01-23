@@ -67,11 +67,14 @@ class ChannelsController < ApplicationController
   # POST /channels
   # POST /channels.json
   def create
-    @channel = Channel.new(channel_params)
+    @channel = Channel.new(name: channel_params[:name])
+    user_ids = channel_params[:user_ids]
 
     respond_to do |format|
       if @channel.save
-        ChannelUser.create(channel_id: @channel.id, user_id:current_user.id)
+        user_ids.each do |user_id|
+          ChannelUser.create(channel_id: @channel.id, user_id:user_id)
+        end
         format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
         format.json { render :show, status: :created, location: @channel }
       else
