@@ -63,7 +63,7 @@
               %li.item
                 %a View channel details
               - if (@channel.users.exists?(current_user.id))
-                %li.item
+                %li#addtional_options.item
                   %a Addtional options...
               - if (@channel.users.exists?(current_user.id))
                 %li.list_divider
@@ -82,6 +82,8 @@
         = fa_icon("phone")
     = render 'flash'
     #messages.main__field.flex{"data-channel_id": "#{@channel.id}"}
+      - if (!@channel.users.exists?(current_user.id))
+        .participation_margin
       - @grouped_contents.keys.each do |date|
         - @grouped_contents[date].each do |content|
           - if content.content_type == "Message"
@@ -106,3 +108,4 @@
     = render 'form'
     = render 'participate'
 = render 'channels'
+= render 'addtional-options'

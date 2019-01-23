@@ -71,6 +71,7 @@ class ChannelsController < ApplicationController
 
     respond_to do |format|
       if @channel.save
+        ChannelUser.create(channel_id: @channel.id, user_id:current_user.id)
         format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
         format.json { render :show, status: :created, location: @channel }
       else

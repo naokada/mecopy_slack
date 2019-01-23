@@ -7,6 +7,9 @@ document.addEventListener('turbolinks:load', function() {
     $("#channels").on('click', function() {
         removeHidden($("#channels_wrapper")[0]);
     });
+    $("#addtional_options").on('click', function() {
+        removeHidden($("#addtional_options_wrapper")[0]);
+    });
     $(".nav").on('click', function(){
         switchNav(this);
         event.stopPropagation();
@@ -52,11 +55,11 @@ function removeHidden(dom) {
 function goBack() {
     let ref = document.referrer;             // リファラ情報を得る
     let hereHost = window.location.hostname; // 現在ページのホスト(ドメイン)名を得る
-    
+
     // ホスト名が含まれるか探す正規表現を作る(大文字・小文字を区別しない)
     let sStr = "^https?://" + hereHost;
     let rExp = new RegExp( sStr, "i" );
-    
+
     if( ref.match( rExp ) ) {
         window.history.back(-1);
         return false;

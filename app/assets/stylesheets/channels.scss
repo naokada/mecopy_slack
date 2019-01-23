@@ -333,16 +333,23 @@ html, body {
     }
 }
 
-#channels_wrapper, .new_channel_wrapper {
+#channels_wrapper, .new_channel_wrapper, #addtional_options_wrapper {
     position: absolute;
     top: 0;
     left:0;
     height: 100vh;
     width: 100vw;
-    z-index: 99;
+    z-index: 90;
     background-color: white;
     overflow: hidden;
     color: $font_cl;
+
+    h1, h2, h3, h4, h5, h6 {
+        color: $font_d_cl;
+    }
+}
+
+#channels_wrapper, .new_channel_wrapper {
     > button {
         position: absolute;
         background-color: white;
@@ -369,104 +376,182 @@ html, body {
         background-color: $green_cl;
         color: white;
     }
-    .contents {
-        padding: 96px 32px 0;
-        &__info {
-            position: absolute;
-            left: 3%;
-            top: 2rem;
-            font-size: 15px;
-            i, a {
-                display: inline-block;
-                color: $font_r_cl;
-            }
-            i {
-                font-size: 1.5em;
-                margin-right: 8px;
-            }
-            a:hover {
-                background-color: white;
-                text-decoration-line: underline;
-            }
-        }
-        &__header {
-            justify-content: space-between;
-            height: 41px;
-            margin-bottom: 32px;
-            h1 {
-                font-size: 2rem;
-                line-height: 41px;
-                margin: 0;
-            }
-            button {
-                height: 36px;
-            }
-        }
-        &__search {
-            margin-bottom: 8px;
-            height:40px;
-            input {
-                width: 100%;
-                margin: 0;
-                height: 100%;
-                font-size: 1rem;
-                padding-left: 40px;
-            }
-            i {
-                font-size: 1.5rem;
-                top: -42px;
-                margin-left: 3px;
-            }
-        }
-        &__list {
-            overflow-y: scroll;
-            overflow-x: hidden;
-            &__title {
-                color: $font_cl;
-                background-color: $header_bg_cl;
-                height: 32px;
-                padding: 4px 0 4px 12px;
-                font-size: 14px;
-                line-height: 32px;
-                border-radius: 4px 4px 0 0;
-            }
-            ul {
-                padding: 0;
-            }
-            &__items {
-                list-style: none;
-                min-height: 75px;
-                padding: 11px 80px 11px 15px;
-                h5 {
-                    font-size: 15px;
-                    margin: 0;
-                    height: 18px;
-                }
-                span {
-                    color: $font_cl;
-                }
-                p {
-                    margin: 0;
-                    font-size: 13px;
-                    height: 18px;
-                }
-                &__details{
-                    margin-bottom: 4px;
-                }
-            }
-            &__items:hover {
-                background-color: $hovered_bg_cl;
-                border-radius: 5px;
-                border: 1px solid $hovered_border_cl;
-            }
-            li+ li{
-                border-top: 1px solid $border_cl;
-            }
+ }
 
+
+
+.channel-options {
+    overflow: scroll !important;
+    .exit-btn {
+        font-size: 20pt;
+        top: 10px;
+        right: 10px;
+        border: none;
+        color: $font_cl;
+        outline: none;
+        position: absolute;
+        z-index: 93;
+    }
+    .exit-btn:hover {
+        color: $font_d_cl;
+    }
+
+    &__header {
+        padding: 8px 16px;
+        position: fixed;
+        width: 100vw;
+        z-index: 92;
+        height: 60px;
+        text-align: center;
+        box-shadow: 0 1px 4px rgba(0,0,0,.15);
+        background-color: white;
+        h1 {
+            font-size: 22px;
         }
     }
-    h1, h2, h3, h4, h5, h6 {
-        color: $font_d_cl;
+
+    &__contents {
+        padding: 32px !important;
+        margin-top: 60px;
+    }
+}
+
+.options_list {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 10px;
+    button {
+        cursor: pointer;
+        position: relative;
+        border-top: 1px solid $border_cl;
+        text-align: left;
+        padding: 20px 48px 24px 16px;
+        min-height: 60px;
+        .channel_options_open {
+            display: none;
+            font-size: 1.75rem;
+            line-height: 1rem;
+            position: absolute;
+            right: 10px;
+            color: $font_cl;
+            top: calc(50% - 1rem);
+        }
+
+    }
+    button:hover {
+        background-color: $hovered_bg_gray_cl;
+        .channel_options_open {
+            display: block;
+        }
+    }
+    h3 {
+        margin-bottom: 4px;
+        margin-top: 0px;
+        line-height: 30px;
+        font-size: 1.125rem;
+    }
+
+    p {
+        line-height: 22px;
+        font-size: 15px;
+        margin: 0;
+    }
+}
+
+.contents {
+    padding: 96px 32px 0;
+    &__info {
+        position: absolute;
+        left: 3%;
+        top: 2rem;
+        font-size: 15px;
+        i, a {
+            display: inline-block;
+            color: $font_r_cl;
+        }
+        i {
+            font-size: 1.5em;
+            margin-right: 8px;
+        }
+        a:hover {
+            background-color: white;
+            text-decoration-line: underline;
+        }
+    }
+    &__header {
+        justify-content: space-between;
+        height: 41px;
+        margin-bottom: 32px;
+        h1 {
+            font-size: 2rem;
+            line-height: 41px;
+            margin: 0;
+        }
+        button {
+            height: 36px;
+        }
+    }
+    &__search {
+        margin-bottom: 8px;
+        height:40px;
+        input {
+            width: 100%;
+            margin: 0;
+            height: 100%;
+            font-size: 1rem;
+            padding-left: 40px;
+        }
+        i {
+            font-size: 1.5rem;
+            top: -42px;
+            margin-left: 3px;
+        }
+    }
+    &__list {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        &__title {
+            color: $font_cl;
+            background-color: $header_bg_cl;
+            height: 32px;
+            padding: 4px 0 4px 12px;
+            font-size: 14px;
+            line-height: 32px;
+            border-radius: 4px 4px 0 0;
+        }
+        ul {
+            padding: 0;
+        }
+        &__items {
+            list-style: none;
+            min-height: 75px;
+            padding: 11px 80px 11px 15px;
+            h5 {
+                font-size: 15px;
+                margin: 0;
+                height: 18px;
+            }
+            span {
+                color: $font_cl;
+            }
+            p {
+                margin: 0;
+                font-size: 13px;
+                height: 18px;
+            }
+            &__details{
+                margin-bottom: 4px;
+            }
+        }
+        &__items:hover {
+            background-color: $hovered_bg_cl;
+            border-radius: 5px;
+            border: 1px solid $hovered_border_cl;
+        }
+        li+ li{
+            border-top: 1px solid $border_cl;
+        }
+
     }
 }
 
@@ -493,9 +578,6 @@ html, body {
     .flex {
         justify-content: flex-start;
         flex-direction: row-reverse;
-        * {
-
-        }
     }
 }
 
@@ -653,6 +735,10 @@ p.strong {
     margin-bottom: 8px !important;
 }
 
+span.gray {
+    color: $font_cl;
+}
+
 .nav {
     width: 16px;
     &__contents {
@@ -706,6 +792,7 @@ p.strong {
 .selected_nav {
     .nav__contents {
         display: block;
+        background-color: white;
     }
     > i {
         color: $link_cl;
@@ -715,6 +802,11 @@ p.strong {
 .channel_intro {
     color: $font_d_cl;
     margin: 48px 32px 16px 16px;
+    z-index: -1;
+    p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
     h1 {
         margin-bottom: 8px;
     }
@@ -736,6 +828,10 @@ p.strong {
             }
         }
     }
+}
+
+.participation_margin {
+    height: 100px;
 }
 
 .btn:hover {
@@ -783,11 +879,18 @@ p.strong {
 
 .button-to-link {
     background-color: transparent;
-    border: none !important;
-    outline: none !important;
+    border: none;
+    outline: none;
     padding: 0;
-    appearance: none !important;
+    appearance: none;
     font-size: inherit;
+    color: inherit;
+}
+
+a.no_link_style {
+    border: none;
+    outline: none;
+    text-decoration: none;
     color: inherit;
 }
 
