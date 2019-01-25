@@ -7,7 +7,8 @@ document.addEventListener 'turbolinks:load', ->
     received: (data) ->
       $('#messages').prepend data['message']
       $('#notice p').html("未読のメッセージがあります")
-      if ($('#notice')[0].classList.contains('hidden'))
+      if isNoticeable is "true"
+        console.log(isNoticeable)
         $('#notice').removeClass("hidden")
 
     speak: (message)->
@@ -18,3 +19,12 @@ $(document).on 'keypress', '[data-behavior~=channel_speaker]', (event) ->
     App.room.speak event.target.value
     event.target.value = ''
     event.preventDefault()
+
+ isNoticeable: ->
+  console.log("isNoticiable?")
+  if $('#notice')[0].classList.contains('hidden')
+    console.log("hiddenですよ")
+  return true
+
+
+

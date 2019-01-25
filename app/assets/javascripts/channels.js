@@ -25,7 +25,7 @@ $(document).on('turbolinks:load',function() {
 
     $.ajax({
       type: 'GET',
-      url: "/channels/search",
+      url: "/channels/search_user",
       data: ("keyword=" + input),
       processData: false,
       contentType: false,

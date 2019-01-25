@@ -26,7 +26,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.new
   end
 
-  def search
+  def search_user
     @users = User.where('name LIKE(?)', "%#{params[:keyword]}%")
     respond_to do |format|
       format.json { render 'new', json: @users }
