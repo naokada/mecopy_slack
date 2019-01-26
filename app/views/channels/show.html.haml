@@ -13,13 +13,16 @@
         %p.hover-white チャンネル
         = fa_icon("plus-circle")
       %ul.groups__list
-        - @channels.each do |channel|
+        - @joined_channels.each do |channel|
           - if channel.id == @channel.id
             %li.selected_channel
               = link_to("# #{channel.name}", channel_path(channel.id))
           - else
             %li
               = link_to("# #{channel.name}", channel_path(channel.id))
+        - if !@joined_channels.ids.include?(@channel.id)
+          %li.selected_channel
+            = link_to("# #{@channel.name}", channel_path(@channel.id))
     .left__directs.groups
       #directs.groups__title
         %p.hover-white ダイレクトメッセージ
