@@ -517,7 +517,6 @@ html, body {
             font-size: 14px;
             line-height: 24px;
             border-radius: 4px 4px 0 0;
-            border-bottom: 1px solid $border_cl;
             margin: 0;
         }
         ul {
@@ -528,6 +527,7 @@ html, body {
             list-style: none;
             min-height: 75px;
             padding: 11px 80px 11px 15px;
+            border-top: 1px solid $border_cl;
             h5 {
                 font-size: 15px;
                 margin: 0;
@@ -549,9 +549,6 @@ html, body {
             background-color: $hovered_bg_cl;
             border-radius: 5px;
             border: 1px solid $hovered_border_cl;
-        }
-        li+ li{
-            border-top: 1px solid $border_cl;
         }
 
     }
@@ -890,10 +887,14 @@ span.gray {
     color: inherit;
 }
 
-a.no_link_style {
+.no_link_style {
     border: none;
     outline: none;
     text-decoration: none;
+    color: inherit;
+}
+.no_link_style:hover {
+    background-color: inherit;
     color: inherit;
 }
 

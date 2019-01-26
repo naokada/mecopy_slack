@@ -3,9 +3,9 @@ $(document).on('turbolinks:load',function() {
 
     function buildHtmlChannel(channel) {
       let date = formatDate(channel.created_at);
-      let html = `<li class="vertical_centered_flex contents__list__items">
-      <h5><span>#</span>${channel.name}</h5><p>作成日：${date}</p>
-      </li>`
+      let html = `<a class="no_link_style" href="/channels/${channel.id}"><li class="vertical_centered_flex contents__list__items">
+      <h5><span>#</span>${channel.name}</h5><p>作成日：${date}</p></li>
+      </a>`
       return html;
     }
 

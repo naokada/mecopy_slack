@@ -19,23 +19,25 @@
 					%h4.contents__list__title あなたが参加できるチャンネル
 					%ul#unjoined-channels-list
 						- @unjoined_channels.each do |channel|
-							%li.vertical_centered_flex.contents__list__items
-								%h5
-									%span #
-									#{channel.name}
-								-# %p.contents__list__details
-								%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
+							= link_to({controller: :channels, action: :show, id: channel.id}, class: "no_link_style") do
+								%li.vertical_centered_flex.contents__list__items
+									%h5
+										%span #
+										#{channel.name}
+									-# %p.contents__list__details
+									%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
 			- if @joined_channels.length > 0
 				.contents__list
 					%h4.contents__list__title あなたが参加しているチャンネル
 					%ul#joined-channels-list
 						- @joined_channels.each do |channel|
-							%li.vertical_centered_flex.contents__list__items
-								%h5
-									%span #
-									#{channel.name}
-								-# %p.contents__list__details
-								%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
+							= link_to({controller: :channels, action: :show, id: channel.id}, class: "no_link_style") do
+								%li.vertical_centered_flex.contents__list__items
+									%h5
+										%span #
+										#{channel.name}
+									-# %p.contents__list__details
+									%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
 			- if @joined_channels.length == 0 && @unjoined_channels.length == 0
 				%p
 					あなたが参加できるチャンネルはありません。
