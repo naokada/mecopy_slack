@@ -1,4 +1,4 @@
-#channels_wrapper.hidden
+#channels_wrapper.scroll.hidden
 	%button.exit-btn
 		= fa_icon("times")
 		%p Esc
@@ -11,28 +11,34 @@
 			-# %button.btn チャンネルを作成する
 			= button_to "チャンネルを作成する", new_channel_path, class: "btn", method: "get"
 		.contents__search.search-box
-			%input{type: "text", placeholder: "チャンネルを検索する"}
+			%input{type: "text", placeholder: "チャンネルを検索する", id:"channel-search-field"}
 			= fa_icon("search")
-		.contents__list
-			%ul
-				%li
+		#channel-search-result
+			- if @unjoined_channels.length > 0
+				.contents__list
 					%h4.contents__list__title あなたが参加できるチャンネル
-				- @channels.each do |channel|
-					%li.vertical_centered_flex.contents__list__items
-						%h5
-							%span #
-							#{channel.name}
-						-# %p.contents__list__details
-						%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
-		.contents__list
-			%ul
-				%li
+					%ul#unjoined-channels-list
+						- @unjoined_channels.each do |channel|
+							%li.vertical_centered_flex.contents__list__items
+								%h5
+									%span #
+									#{channel.name}
+								-# %p.contents__list__details
+								%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
+			- if @joined_channels.length > 0
+				.contents__list
 					%h4.contents__list__title あなたが参加しているチャンネル
-				- @channels.each do |channel|
-					%li.vertical_centered_flex.contents__list__items
-						%h5
-							%span #
-							#{channel.name}
-						-# %p.contents__list__details
-						%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
+					%ul#joined-channels-list
+						- @joined_channels.each do |channel|
+							%li.vertical_centered_flex.contents__list__items
+								%h5
+									%span #
+									#{channel.name}
+								-# %p.contents__list__details
+								%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
+			- if @joined_channels.length == 0 && @unjoined_channels.length == 0
+				%p
+					あなたが参加できるチャンネルはありません。
+					%br
+					新規チャンネルを作成してください。
 

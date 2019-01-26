@@ -35,6 +35,16 @@ class ChannelsController < ApplicationController
     end
   end
 
+  def search
+    @channels = Channel.where('name LIKE(?)', "%#{params[:keyword]}%")
+    @current_user_channels_ids = current_user.channels.ids
+    @joined_channels = Channel.where id: @channels.ids & @current_user_channels_ids
+    @unjoined_channels = Channel.where id: @channels.ids - @current_user_channels_ids
+    respond_to do |format|
+      format.json { render 'new', json: [@unjoined_channels, @joined_channels] }
+    end
+  end
+
   def participate
     @channel = Channel.find(participate_params[:channel_id])
     if (!@channel.users.exists?(current_user.id))

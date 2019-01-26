@@ -1,98 +1,69 @@
-// $(document).on('turbolinks:load',function() {
-//     // let defalutDom = $("#user-search-result")[0];
-//     let added_users = [];
+$(document).on('turbolinks:load',function() {
+  let defaultChannelsHTML = document.getElementById("channel-search-result").innerHTML;
 
-//     function buildHtmlUser(user) {
-//         let html = `<div  data-behavior="add_user" data-user-id="${ user.id }" data-user-name="${ user.name }">
-//         <img src="/assets/default_prof1-8b14ffdea934dd66890d13138fb941feeaf79a96282d2301a69545a1cb5b5ebf.png">
-//         <p>${ user.name }</p>
-//     </div>`
-//         return html;
-//     }
-//     function buildHtmlAddedUser(user) {
-//     let html = `<div  data-behavior="remove_user">
-//     <input name='channel[user_ids][]' type='hidden' value='${ user.data('user-id') }'>
-//     <img src="/assets/default_prof1-8b14ffdea934dd66890d13138fb941feeaf79a96282d2301a69545a1cb5b5ebf.png">
-//     <p>${ user.data('user-name') }</p>
-//     <i class="fa fa-times"></i>
-//     </div>`
-//     return html;
-//     }
+    function buildHtmlChannel(channel) {
+      let date = formatDate(channel.created_at);
+      let html = `<li class="vertical_centered_flex contents__list__items">
+      <h5><span>#</span>${channel.name}</h5><p>作成日：${date}</p>
+      </li>`
+      return html;
+    }
 
-//     $("#user-search-field").on("keyup", function(e) {
-//     e.preventDefault();
-//     let input = $.trim($(this).val());
+    function buildHtmlNoChannel(input) {
+      let html = `<p><span>${input}</span>に当てはまるチャンネルはありませんでした。</p>`
+      return html;
+    }
 
-//     $.ajax({
-//       type: 'GET',
-//       url: "/channels/search_user",
-//       data: ("keyword=" + input),
-//       processData: false,
-//       contentType: false,
-//       dataType: 'json'
-//     })
+    $("#channel-search-field").on("keyup", function(e) {
+    e.preventDefault();
+    let input = $.trim($(this).val());
 
-//     .done(function(data) {
-//       let search_list = $("#user-search-result")
-//       search_list.empty();
+    $.ajax({
+      type: 'GET',
+      url: "/channels/search",
+      data: ("keyword=" + input),
+      processData: false,
+      contentType: false,
+      dataType: 'json'
+    })
 
-//       if (input.length !== 0) {
-//         let users = $(data);
-//         users = Object.values(users);
-//         let count = 0;
-//         users.pop();
-//         users.forEach(function(user) {
-//           if (added_users.indexOf(user["id"]) == -1){
-//             let html = buildHtmlUser(user);
-//             search_list.append(html);
-//             count++;
-//           }
-//         });
-//         if (count > 0) {
-//           removeHidden($("#user-search-result")[0]);
-//         }
-//       }
-//     })
-//     .fail(function() {
-//       alert("ユーザー検索に失敗しました");
-//     })
-//   });
+    .done(function(data) {
+      // データを入れる箱を取得、空にする
+      let joined_list = $("#joined-channels-list")
+      let unjoined_list = $("#unjoined-channels-list")
+      joined_list.empty();
+      unjoined_list.empty();
 
-//   $("#user-search-result").on("click",'[data-behavior~=add_user]', function() {
-//     let added_list = $("#user-added")
-//     let user = $(this);
-//     let html = buildHtmlAddedUser(user);
-//     added_users.push(user.data("user-id"));
-//     added_list.append(html);
-//     user.html("").css({'border':'none'});
-//     if (isResultEmpty()) {
-//       addHidden($("#user-search-result")[0]);
-//     }
-//   });
+      if (input.length !== 0) {
+        console.log(data);
+        if (data[0].length > 0) { //もしユーザーが参加していないチャンネル（参加できる）があった時
+          data[0].forEach(function(channel) {
+            unjoined_list.append(buildHtmlChannel(channel));
+          });
+        }
+        if (data[1].length > 0) { //もしユーザーが参加しているチャンネルがあった時
+          data[1].forEach(function(channel) {
+            joined_list.append(buildHtmlChannel(channel));
+          });
+        }
+        if (data[0].length === 0 && data[1].length === 0) {
+          $("#channel-search-result").html(buildHtmlNoChannel(input));
+        }
+      } else  {
+        $("#channel-search-result").html(defaultChannelsHTML);
+      }
+    })
+    .fail(function() {
+      alert("チャンネル検索に失敗しました");
+    })
+  });
 
-//   $("#user-added").on("click", '[data-behavior~=remove_user]', function() {
-//     let user = $(this);
+});
 
-//     added_users = added_users.filter(function( item ) {
-//       return item != user.children("input").val();
-//     });
+// Format date to year/month/date from created_at
+function formatDate(created_at) {
+  let date = new Date(created_at);
+  let month = date.getMonth() + 1;
+  return date.getFullYear() + "/" + month + "/" + date.getDate();
+}
 
-//     user.html("").css({'border':'none'});
-//   });
-//   $("a.user-search-remove").on("click", function() {
-//     let user = $(this).parent();
-//     user.html("").css({'border':'none'});
-//   });
-
-// });
-
-// function isResultEmpty() {
-//   let children = $("#user-search-result").children();
-//   let result = true;
-//   children.each(function(i, child) {
-//     if (child.style.border != "none") {
-//       result = false;
-//     }
-//   });
-//   return result;
-// }

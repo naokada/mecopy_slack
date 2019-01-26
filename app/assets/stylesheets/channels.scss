@@ -341,7 +341,6 @@ html, body {
     width: 100vw;
     z-index: 90;
     background-color: white;
-    overflow: hidden;
     color: $font_cl;
 
     h1, h2, h3, h4, h5, h6 {
@@ -511,16 +510,19 @@ html, body {
         overflow-y: scroll;
         overflow-x: hidden;
         &__title {
-            color: $font_cl;
+            // color: $font_r_cl;
             background-color: $header_bg_cl;
             height: 32px;
             padding: 4px 0 4px 12px;
             font-size: 14px;
-            line-height: 32px;
+            line-height: 24px;
             border-radius: 4px 4px 0 0;
+            border-bottom: 1px solid $border_cl;
+            margin: 0;
         }
         ul {
             padding: 0;
+            margin: 0 !important;
         }
         &__items {
             list-style: none;
@@ -894,6 +896,11 @@ a.no_link_style {
     text-decoration: none;
     color: inherit;
 }
+
+.scroll {
+    overflow: scroll;
+}
+
 
 
 * {
