@@ -12,6 +12,8 @@ class ChannelsController < ApplicationController
   # GET /channels/1.json
   def show
     @channels = Channel.all
+    @joined_channels = current_user.channels
+    @unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
     @channel = Channel.find(params[:id])
     # @grouped_messages = @channel.messages.includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     grouped_contents = @channel.feed_contents.order('created_at DESC')

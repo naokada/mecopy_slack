@@ -16,6 +16,17 @@
 		.contents__list
 			%ul
 				%li
+					%h4.contents__list__title あなたが参加できるチャンネル
+				- @channels.each do |channel|
+					%li.vertical_centered_flex.contents__list__items
+						%h5
+							%span #
+							#{channel.name}
+						-# %p.contents__list__details
+						%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
+		.contents__list
+			%ul
+				%li
 					%h4.contents__list__title あなたが参加しているチャンネル
 				- @channels.each do |channel|
 					%li.vertical_centered_flex.contents__list__items
