@@ -201,18 +201,13 @@ html, body {
 }
 
 .scroll::-webkit-scrollbar {
-    display: none; }
+    display: none;
+}
 
 .message {
     height: 61px;
     padding: 6px 25px;
     flex: 0 0 auto;
-    img {
-        height: 36px;
-        width: 36px;
-        object-fit: cover;
-        border-radius: 3px;
-    }
     h4 {
         color: black;
     }
@@ -276,6 +271,7 @@ html, body {
             height: 100%;
             font-size: 12pt;
             padding-left: 10px;
+            width: calc(100% - 40px);
         }
         input::placeholder {
             color: $field_border_cl;
@@ -756,6 +752,20 @@ span.gray {
         box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 4px 12px 0 rgba(0,0,0,.12);
         display: none;
         position: relative;
+        &__header { // use flex
+            margin: 16px 24px 8px;
+            vertical-align: left;
+            align-items: center;
+            img {
+                margin-right: 10px;
+            }
+            h2 {
+                color: $font_d_cl;
+                line-height: 2.45;
+                font-size: 1rem;
+                margin: 0;
+            }
+        }
         ul {
             margin: 12px 0;
             padding: 0;
@@ -766,10 +776,14 @@ span.gray {
             }
             li.item:hover {
                 background-color: $link_hover_cl;
+                > * {
+                    color: white;
+                }
             }
             li.item {
                 padding: 0 24px;
                 font-size: 10pt;
+                cursor: pointer;
                 a, input {
                     text-decoration: none;
                     line-height: 28px;
@@ -908,6 +922,13 @@ span.gray {
 
 .scroll {
     overflow: scroll;
+}
+
+.thumb_36 {
+    height: 36px;
+    width: 36px;
+    object-fit: cover;
+    border-radius: 3px;
 }
 
 
