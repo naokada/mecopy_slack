@@ -11,6 +11,8 @@ html, body {
     height: 100vh;
     background-color: $side_bg_cl;
     color: $side_font_cl;
+    z-index: 1;
+
     h3 {
         color: $side_font_h_cl;
         display: inline-block;
@@ -61,6 +63,7 @@ html, body {
             padding: 0 16px;
             position: relative;
             height: 26px;
+            z-index: 1;
             i {
                 position: absolute;
                 left: 185px;
@@ -150,6 +153,9 @@ html, body {
             }
             .search-box i {
                 left: -142px;
+            }
+            .nav {
+                width: 16px;
             }
         }
 
@@ -518,6 +524,7 @@ html, body {
             line-height: 24px;
             border-radius: 4px 4px 0 0;
             margin: 0;
+            position: relative;
         }
         ul {
             padding: 0;
@@ -740,7 +747,6 @@ span.gray {
 }
 
 .nav {
-    width: 16px;
     &__contents {
         // min-width: 200px;
         // max-width: 360px;
@@ -749,6 +755,7 @@ span.gray {
         border-radius: 6px;
         box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 4px 12px 0 rgba(0,0,0,.12);
         display: none;
+        position: relative;
         ul {
             margin: 12px 0;
             padding: 0;
@@ -793,6 +800,7 @@ span.gray {
     .nav__contents {
         display: block;
         background-color: white;
+        z-index: 2;
     }
     > i {
         color: $link_cl;

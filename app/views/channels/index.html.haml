@@ -1,12 +1,13 @@
 .wrapper.flex
   .left
-    .left__info.header
+    .left__info.header.nav
       %h3 UZEMI
       = fa_icon("angle-down")
       = fa_icon("bell")
       .left__info__user
         = fa_icon("circle")
         %p naokada
+      = render 'nav_user'
     .left__threads
     .left__channels.groups
       .groups__title

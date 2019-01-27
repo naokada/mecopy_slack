@@ -21,4 +21,6 @@
         %a.only_large(href="https://slack.com/pricing?ui_step=55&ui_element=5") Pricing
         %a.only_large(href="https://slack.com/intl/ja-jp/features") Product
     .devise_body
+      - flash.each do |key, value|
+        = content_tag(:div, value, class: "devise_#{key}")
       = yield

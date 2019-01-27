@@ -70,7 +70,6 @@ function goBack() {
 }
 
 function switchNav(dom) {
-    console.log(dom);
     if (!(dom.classList.contains('selected_nav'))) {
         dom.classList.add('selected_nav');
     } else {
