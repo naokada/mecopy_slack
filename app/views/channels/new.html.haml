@@ -1,5 +1,22 @@
-%h1 New channel
-
-= render 'form'
-
-= link_to 'Back', channels_path
+.new_channel_wrapper
+	%button.back-btn
+		= fa_icon("times")
+		%p Esc
+	.contents
+		.contents__header
+			%h1 チャンネルを作成する
+		%p チャンネルとはメンバーがコミュニケーションを撮る場所です。特定のトピックに基づいてチャンネルを作ると良いでしょう。（例：#営業）
+		= form_with model: @channel do |f|
+			.field
+				= f.label :name, "名前"
+				%br/
+				.search-box
+					= f.text_field :name, placeholder: "例:営業"
+					= fa_icon("hashtag")
+			.field
+				= f.label :users, "招待の送信先:(任意)"
+				%br/
+				= render "user-search"
+			.flex
+				= f.submit "チャンネルを作成する", class: "btn"
+				%button.btn.cancel-btn キャンセル

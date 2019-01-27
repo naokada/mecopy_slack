@@ -1,0 +1,22 @@
+.nav__contents.nav_user
+  .nav__contents__header.flex
+    = image_tag('default_prof1.png', class: "thumb_36")
+    %h2 #{current_user.name}
+  %ul
+    %li.item
+      %a Set a status
+    %li.item
+      %a Profile & account
+    %li.item
+      %a Preferences
+    %li.item
+      %a
+        Set yourself to 
+        %strong
+          away
+    %li.item
+      %a Help & feedback
+    - if user_signed_in?
+      %li.list_divider
+      %li.item
+        = button_to "Sign out", destroy_user_session_path, method: :delete, class: "button-to-link"

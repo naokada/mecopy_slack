@@ -1,0 +1,46 @@
+#channels_wrapper.scroll.hidden
+	%button.exit-btn
+		= fa_icon("times")
+		%p Esc
+	.contents
+		.contents__info
+			= fa_icon("info-circle")
+			%a チャンネルについて...
+		.contents__header.flex
+			%h1 チャンネル一覧
+			-# %button.btn チャンネルを作成する
+			= button_to "チャンネルを作成する", new_channel_path, class: "btn", method: "get"
+		.contents__search.search-box
+			%input{type: "text", placeholder: "チャンネルを検索する", id:"channel-search-field"}
+			= fa_icon("search")
+		#channel-search-result
+			- if @unjoined_channels.length > 0
+				.contents__list
+					%h4.contents__list__title あなたが参加できるチャンネル
+					%ul#unjoined-channels-list
+						- @unjoined_channels.each do |channel|
+							= link_to({controller: :channels, action: :show, id: channel.id}, class: "no_link_style") do
+								%li.vertical_centered_flex.contents__list__items
+									%h5
+										%span #
+										#{channel.name}
+									-# %p.contents__list__details
+									%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
+			- if @joined_channels.length > 0
+				.contents__list
+					%h4.contents__list__title あなたが参加しているチャンネル
+					%ul#joined-channels-list
+						- @joined_channels.each do |channel|
+							= link_to({controller: :channels, action: :show, id: channel.id}, class: "no_link_style") do
+								%li.vertical_centered_flex.contents__list__items
+									%h5
+										%span #
+										#{channel.name}
+									-# %p.contents__list__details
+									%p 作成日：#{channel.created_at.strftime('%Y/%m/%d')}
+			- if @joined_channels.length == 0 && @unjoined_channels.length == 0
+				%p
+					あなたが参加できるチャンネルはありません。
+					%br
+					新規チャンネルを作成してください。
+

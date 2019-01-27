@@ -1,0 +1,24 @@
+.nav__contents
+  %ul
+    %li.item
+      %a Jump to date...
+    %li.item
+      %a Invite new members to join...
+    %li.item
+      %a View channel details
+    - if (@channel.users.exists?(current_user.id))
+      %li#addtional_options.item
+        %a Addtional options...
+    - if (@channel.users.exists?(current_user.id))
+      %li.list_divider
+      %li.item
+        %a Notification preferences...
+      %li.item
+        %a Mute ##{@channel.name}
+      %li.list_divider
+      %li.item
+        %a Add an app
+    - if (@channel.users.exists?(current_user.id))
+      %li.list_divider
+      %li.item
+        = button_to "Leave ##{@channel.name}", unparticipate_channel_path(@channel.id), method: :delete, class: "button-to-link"

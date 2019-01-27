@@ -1,0 +1,38 @@
+#addtional_options_wrapper.channel-options.hidden
+  %button.exit-btn
+    = fa_icon("times")
+  .channel-options__header
+    %h1
+      Additional options for
+      %span.gray ##{@channel.name}
+
+  .contents.channel-options__contents
+    .options_list.vertical_centered_flex
+      %button.button-to-link
+        %h3 Archive this channel
+        %p If you don’t think it will be used anymore and you want to clean up, archive it. The channel can be unarchived later (but everyone will have been removed).
+        .channel_options_open
+          = fa_icon("arrow-right")
+      %button.button-to-link
+        %h3 Change to a private channel
+        %p Private channels can only be joined if you are added by a current member — they won’t show up in your channel browser. This change can’t be undone.
+        .channel_options_open
+          = fa_icon("arrow-right")
+      %button.button-to-link
+        %h3 Rename this channel
+        %p You can rename a channel at any time. But, use it sparingly: it might confuse or disorient your colleagues!
+        .channel_options_open
+          = fa_icon("arrow-right")
+      %button.button-to-link
+        %h3 Set the channel purpose
+        %p Channel purposes are especially useful to new members choosing which conversations to join.
+        .channel_options_open
+          = fa_icon("arrow-right")
+      %a{href: "/channels/#{@channel.id}", data:{method: "delete"}, class:"no_link_style"}
+        = button_tag(type: "button", class:"button-to-link") do
+          %h3 Delete this channel
+          %p Deleting a channel will permanently remove all of its messages. This cannot be undone.
+          .channel_options_open
+            = fa_icon("arrow-right")
+      -# = button_to "delete", @channel, :method => "delete"
+      -# %button type: "link", data:{method:"delete"}

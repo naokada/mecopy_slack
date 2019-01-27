@@ -1,9 +1,93 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @channel.name
-
-= link_to 'Edit', edit_channel_path(@channel)
-\|
-= link_to 'Back', channels_path
+.wrapper.flex
+  .left
+    .left__info.header.nav
+      .left__info__workspace
+        %h3 UZEMI
+        = fa_icon("angle-down")
+      = fa_icon("bell")
+      .left__info__user
+        = fa_icon("circle")
+        %p naokada
+      = render 'nav_user'
+    .left__threads
+    .left__channels.groups
+      #channels.groups__title
+        %p.hover-white チャンネル
+        = fa_icon("plus-circle")
+      %ul.groups__list
+        - @joined_channels.each do |channel|
+          - if channel.id == @channel.id
+            %li.selected_channel
+              = link_to("# #{channel.name}", channel_path(channel.id))
+          - else
+            %li
+              = link_to("# #{channel.name}", channel_path(channel.id))
+        - if !@joined_channels.ids.include?(@channel.id)
+          %li.selected_channel
+            = link_to("# #{@channel.name}", channel_path(@channel.id))
+    .left__directs.groups
+      #directs.groups__title
+        %p.hover-white ダイレクトメッセージ
+        = fa_icon("plus-circle")
+      %ul.groups__list
+        %li
+          %a #{fa_icon("circle")} slackbot
+        %li
+          %a #{fa_icon("circle")} naokada
+    .left__apps.groups
+      .groups__title
+        %p.hover-white App
+        = fa_icon("plus-circle")
+  .main
+    .main__header.header.flex
+      .main__header__left
+        .main__header__left__title
+          %h3 ##{@channel.name}
+          %ul.channel_small_info_list
+            %li #{fa_icon("star")}
+            %li #{fa_icon("user")} 1
+            %li #{fa_icon("thumb-tack")} 1
+            %li #{fa_icon("pencil")} トピックの追加
+        .main__header__info
+      .main__header__right.flex
+        .nav
+          = fa_icon("ellipsis-v")
+        = fa_icon("star")
+        = fa_icon("at")
+        .search-box-btn
+          = fa_icon("search")
+          %p 検索
+        .nav
+          = fa_icon("cog")
+          = render 'nav_channel'
+        = fa_icon("info-circle")
+        = fa_icon("phone")
+    = render 'flash'
+    #messages.main__field.flex{"data-channel_id": "#{@channel.id}"}
+      - if (!@channel.users.exists?(current_user.id))
+        .participation_margin
+      - @grouped_contents.keys.each do |date|
+        - @grouped_contents[date].each do |content|
+          - if content.content_type == "Message"
+            = render partial: "messages/message", locals: { message: content.content }
+          - elsif content.content_type == "ChannelUser"
+            = render partial: "participation", locals: { channel_user: content.content }
+        .divider
+          %hr.divider__line
+          %p.divider__label #{date}
+      .channel_intro
+        %h1 # #{@channel.name}
+        %p
+          This channel created on #{@channel.created_at.strftime('%Y/%m/%d')}. This is the very beginning of the 
+          %strong ##{@channel.name}
+        %ul
+          %li
+            %a #{fa_icon("pencil")} Set a purpose
+          %li
+            %a #{fa_icon("plus")} Add an app
+          %li
+            %a #{fa_icon("user")} Invite others to this channel
+    = render 'form'
+    = render 'participate'
+= render 'channels'
+= render 'addtional-options'
