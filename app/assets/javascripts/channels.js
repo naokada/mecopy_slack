@@ -1,18 +1,18 @@
 $(document).on('turbolinks:load',function() {
-  let defaultChannelsHTML = document.getElementById("channel-search-result").innerHTML;
+  function buildHtmlChannel(channel) {
+    let date = formatDate(channel.created_at);
+    let html = `<a class="no_link_style" href="/channels/${channel.id}"><li class="vertical_centered_flex contents__list__items">
+    <h5><span>#</span>${channel.name}</h5><p>作成日：${date}</p></li>
+    </a>`
+    return html;
+  }
 
-    function buildHtmlChannel(channel) {
-      let date = formatDate(channel.created_at);
-      let html = `<a class="no_link_style" href="/channels/${channel.id}"><li class="vertical_centered_flex contents__list__items">
-      <h5><span>#</span>${channel.name}</h5><p>作成日：${date}</p></li>
-      </a>`
-      return html;
-    }
-
-    function buildHtmlNoChannel(input) {
-      let html = `<p><span>${input}</span>に当てはまるチャンネルはありませんでした。</p>`
-      return html;
-    }
+  function buildHtmlNoChannel(input) {
+    let html = `<p><span>${input}</span>に当てはまるチャンネルはありませんでした。</p>`
+    return html;
+  }
+  if(document.getElementById("channel-search-result") != null){
+    let defaultChannelsHTML = document.getElementById("channel-search-result").innerHTML;
 
     $("#channel-search-field").on("keyup", function(e) {
     e.preventDefault();
@@ -35,7 +35,6 @@ $(document).on('turbolinks:load',function() {
       unjoined_list.empty();
 
       if (input.length !== 0) {
-        console.log(data);
         if (data[0].length > 0) { //もしユーザーが参加していないチャンネル（参加できる）があった時
           data[0].forEach(function(channel) {
             unjoined_list.append(buildHtmlChannel(channel));
@@ -57,6 +56,7 @@ $(document).on('turbolinks:load',function() {
       alert("チャンネル検索に失敗しました");
     })
   });
+  }
 
 });
 
