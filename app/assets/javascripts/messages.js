@@ -4,7 +4,7 @@ document.addEventListener('turbolinks:load', function() {
     }
     $("#messages").on('scroll', isScrolledBottom);
     $("#notice button").on('click', scroll);
-    $("#channels").on('click', function() {
+    $(".channels").on('click', function() {
         removeHidden($("#channels_wrapper")[0]);
     });
     $("#addtional_options").on('click', function() {
