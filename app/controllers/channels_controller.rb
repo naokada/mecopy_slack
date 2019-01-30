@@ -5,6 +5,8 @@ class ChannelsController < ApplicationController
   # GET /channels.json
   def index
     @channels = Channel.all
+    @joined_channels = current_user.channels
+    @unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
   end
 
   # GET /channels/1
