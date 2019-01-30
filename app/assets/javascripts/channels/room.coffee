@@ -20,7 +20,7 @@ $(document).on 'keypress', '[data-behavior~=channel_speaker]', (event) ->
     event.target.value = ''
     event.preventDefault()
 
- isNoticeable: ->
+isNoticeable: ->
   console.log("isNoticiable?")
   if $('#notice')[0].classList.contains('hidden')
     console.log("hiddenですよ")
