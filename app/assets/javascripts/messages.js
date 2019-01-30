@@ -1,14 +1,16 @@
 document.addEventListener('turbolinks:load', function() {
-    if (($("#messages").length)) {
-        scroll();
+    if ($("#messages") != null ) {
+        if (($("#messages").length)) {
+            scroll();
+        }
     }
     $("#messages").on('scroll', isScrolledBottom);
+    $("#addtional_options").on('click', function() {
+        removeHidden($("#addtional_options_wrapper")[0]);
+    });
     $("#notice button").on('click', scroll);
     $(".channels").on('click', function() {
         removeHidden($("#channels_wrapper")[0]);
-    });
-    $("#addtional_options").on('click', function() {
-        removeHidden($("#addtional_options_wrapper")[0]);
     });
     $(".nav").on('click', function(){
         switchNav(this);
