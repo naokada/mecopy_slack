@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: mecopy_slack_production
-  username: mecopy_slack
-  password: <%= ENV['MECOPY_SLACK_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
