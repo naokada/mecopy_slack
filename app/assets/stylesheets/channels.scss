@@ -194,9 +194,9 @@ html, body {
 .main__field {
     flex-direction: column-reverse;
     height: calc(100vh - 61px - 66px);
-    flex-wrap: nowrap; /* [1] */
-    overflow-x: auto; /* [1] */
-    -webkit-overflow-scrolling: touch; /* [4] */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
