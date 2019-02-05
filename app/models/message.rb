@@ -1,4 +1,5 @@
 class Message < ApplicationRecord
+	enum message_for: [:channel, :directs]
 	belongs_to :channel
 	belongs_to :user
 	validates :content, presence: true
