@@ -1,7 +1,7 @@
 class Direct < ApplicationRecord
-  has_many: users, through: :direct_users
-  has_many: direct_users
-  has_many: messages
+  has_many :direct_users, dependent: :delete_all
+  has_many :users, through: :direct_users
+  has_many :messages
 
   # before_validation: :is_unique
 

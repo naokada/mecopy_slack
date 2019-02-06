@@ -350,7 +350,7 @@ html, body {
     }
 }
 
-#channels_wrapper, .new_channel_wrapper {
+#channels_wrapper, .new_channel_wrapper, .new_direct_wrapper {
     > button {
         position: absolute;
         background-color: white;
@@ -554,6 +554,12 @@ html, body {
             border: 1px solid $hovered_border_cl;
         }
 
+    }
+}
+
+.contents__list-user {
+    p {
+        margin-left: 15px;
     }
 }
 
@@ -879,6 +885,12 @@ span.gray {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.align-item_centered_flex {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
 .horizontal_centered_flex {

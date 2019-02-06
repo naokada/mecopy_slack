@@ -30,7 +30,7 @@ class ChannelsController < ApplicationController
   end
 
   def search_user
-    @users = User.where('name LIKE(?)', "%#{params[:keyword]}%")
+    @users = User.where('name LIKE(?)', "%#{params[:keyword]}%").where.not(id: current_user.id)
     respond_to do |format|
       format.json { render 'new', json: @users }
     end
@@ -82,6 +82,7 @@ class ChannelsController < ApplicationController
   def create
     @channel = Channel.new(name: channel_params[:name])
     user_ids = channel_params[:user_ids]
+    user_ids << current_user.id
 
     respond_to do |format|
       if @channel.save

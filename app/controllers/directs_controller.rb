@@ -2,25 +2,30 @@ class DirectsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
-    # @channels = Channel.all
-    # @joined_channels = current_user.channels
-    # @unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
-    # @channel = Channel.find(params[:id])
-    # # @grouped_messages = @channel.messages.includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
-    # grouped_contents = @channel.feed_contents.order('created_at DESC')
+    @channels = Channel.all
+    @joined_channels = current_user.channels
+    @unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
+    @direct = Direct.find(params[:id])
+    @grouped_messages = Message.where(channel_id: @direct.id, message_for: "direct").includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
+    # grouped_contents = @channel.messages.order('created_at DESC')
     # grouped_contents_included = grouped_contents.map(&:content)
     # @grouped_contents = grouped_contents.group_by{|u| u.created_at.strftime('%Y/%m/%d')}
-    # @message = Message.new
+    @message = Message.new
     # binding.pry
   end
 
   def new
     @direct = Direct.new
+    @users = User.where.not(id: current_user.id)
   end
 
   def create
+    # TODO 誰も選択していない時の処理
+
     @direct = Direct.new
-    user_ids = direct_params[:user_ids].sort
+    user_ids = direct_params[:user_ids].map(&:to_i)
+    user_ids << current_user.id
+    user_ids = user_ids.sort
     user_directs = current_user.directs
 
     existed_direct_users = []
@@ -34,7 +39,7 @@ class DirectsController < ApplicationController
     duplicated_dm = existed_direct_users.select {|edu| edu[:users] == user_ids}
 
     respond_to do |format|
-      if duplicated_dm == 0
+      if duplicated_dm.length == 0
         if user_ids.count > 0 && @direct.save
           user_ids.each do |user_id|
             DirectUser.create(direct_id: @direct.id, user_id:user_id)
