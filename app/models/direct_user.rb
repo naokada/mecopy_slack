@@ -1,0 +1,2 @@
+class DirectUser < ApplicationRecord
+end

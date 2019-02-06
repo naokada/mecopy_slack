@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :messages
   has_many :channel_users, dependent: :delete_all
   has_many :channels, through: :channel_users
+  has_many :direct_users, dependent: :delete_all
+  has_many :directs, through: :direct_users
 end

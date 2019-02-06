@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_045008) do
+ActiveRecord::Schema.define(version: 2019_02_05_143414) do
 
   create_table "channel_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -26,6 +26,20 @@ ActiveRecord::Schema.define(version: 2019_02_04_045008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "channel_type", default: 0, null: false
+  end
+
+  create_table "direct_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "direct_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["direct_id"], name: "index_direct_users_on_direct_id"
+    t.index ["user_id"], name: "index_direct_users_on_user_id"
+  end
+
+  create_table "directs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "feed_contents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -64,4 +78,6 @@ ActiveRecord::Schema.define(version: 2019_02_04_045008) do
 
   add_foreign_key "channel_users", "channels"
   add_foreign_key "channel_users", "users"
+  add_foreign_key "direct_users", "directs"
+  add_foreign_key "direct_users", "users"
 end

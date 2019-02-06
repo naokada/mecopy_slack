@@ -4,7 +4,7 @@ class ChannelsController < ApplicationController
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.all
+    @channels = Channel.order('name ASC')
     @joined_channels = current_user.channels
     @unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
   end
@@ -13,7 +13,7 @@ class ChannelsController < ApplicationController
   # GET /channels/1.json
   def show
     @channels = Channel.all
-    @joined_channels = current_user.channels
+    @joined_channels = current_user.channels.order('name ASC')
     @unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
     @channel = Channel.find(params[:id])
     # @grouped_messages = @channel.messages.includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
