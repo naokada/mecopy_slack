@@ -1,12 +1,10 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
+  before_action :set_channels, only: [:index, :show]
 
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.order('name ASC')
-    @joined_channels = current_user.channels
-    @unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
   end
 
   # GET /channels/1

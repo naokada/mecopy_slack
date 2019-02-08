@@ -1,43 +1,5 @@
 .wrapper.flex
-  .left
-    .left__info.header.nav
-      .left__info__workspace
-        %h3 UZEMI
-        = fa_icon("angle-down")
-      = fa_icon("bell")
-      .left__info__user
-        = fa_icon("circle")
-        %p naokada
-      = render 'nav_user'
-    .left__threads
-    .left__channels.groups
-      .channels.groups__title
-        %p.hover-white チャンネル
-        = fa_icon("plus-circle")
-      %ul.groups__list
-        - @joined_channels.each do |channel|
-          - if channel.id == @channel.id
-            %li.selected_channel
-              = link_to("# #{channel.name}", channel_path(channel.id))
-          - else
-            %li
-              = link_to("# #{channel.name}", channel_path(channel.id))
-        - if !@joined_channels.ids.include?(@channel.id)
-          %li.selected_channel
-            = link_to("# #{@channel.name}", channel_path(@channel.id))
-    .left__directs.groups
-      #directs.groups__title
-        %p.hover-white ダイレクトメッセージ
-        = fa_icon("plus-circle")
-      %ul.groups__list
-        %li
-          %a #{fa_icon("circle")} slackbot
-        %li
-          %a #{fa_icon("circle")} naokada
-    .left__apps.groups
-      .groups__title
-        %p.hover-white App
-        = fa_icon("plus-circle")
+  = render 'layouts/left_layout'
   .main
     .main__header.header.flex
       .main__header__left
@@ -89,5 +51,4 @@
             %a #{fa_icon("user")} Invite others to this channel
     = render 'form'
     = render 'participate'
-= render 'channels'
-= render 'addtional-options'
+  = render 'addtional-options'

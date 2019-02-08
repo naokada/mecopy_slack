@@ -1,43 +1,5 @@
 .wrapper.flex
-  .left
-    .left__info.header.nav
-      .left__info__workspace
-        %h3 UZEMI
-        = fa_icon("angle-down")
-      = fa_icon("bell")
-      .left__info__user
-        = fa_icon("circle")
-        %p naokada
-    .left__threads
-    .left__channels.groups
-      .channels.groups__title
-        %p.hover-white チャンネル
-        = fa_icon("plus-circle")
-      %ul.groups__list
-        - @joined_channels.each do |channel|
-          %li
-            = link_to("# #{channel.name}", channel_path(channel.id))
-    .left__directs.groups
-      -# #directs.groups__title
-      = link_to(new_direct_path, {class:"groups__title no_link_style", id: "directs"}) do
-        %p.no_link_style.hover-white ダイレクトメッセージ
-        = fa_icon("plus-circle")
-      %ul.groups__list
-        -# %li
-        -#   %a #{fa_icon("circle")} slackbot
-        -# %li
-        -#   %a #{fa_icon("circle")} naokada
-        - @directs.each do |direct|
-          - if direct.id == @direct.id
-            %li.selected_channel
-              = link_to("#{direct.users.map(&:name).select{|name| name != current_user.name}.join(", ")}", direct_path(direct.id))
-          - else
-            %li
-              = link_to("#{direct.users.map(&:name).select{|name| name != current_user.name}.join(", ")}", direct_path(direct.id))
-    .left__apps.groups
-      .groups__title
-        %p.hover-white App
-        = fa_icon("plus-circle")
+  = render 'layouts/left_layout'
   .main
     .main__header.header.flex
       .main__header__left
@@ -70,4 +32,3 @@
           %hr.divider__line
           %p.divider__label #{date}
     = render 'form'
-= render 'channels/channels'

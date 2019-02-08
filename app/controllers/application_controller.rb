@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 	before_action :authenticate_user!
-	before_action :configure_permitted_parameters, :if => :devise_controller?
+	before_action :configure_permitted_parameters, if: :devise_controller?
 	layout :layout_by_resource
 	around_action :set_time_zone, if: :user_time_zone_present?
 
@@ -20,6 +20,13 @@ class ApplicationController < ActionController::Base
 
 	def configure_permitted_parameters
 		devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :nickname, :role, :phone, :skype])
+	end
+
+	def set_channels
+		@channels = Channel.order('name ASC')
+    @joined_channels = current_user.channels
+		@unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
+		@directs = current_user.directs
 	end
 
 	private
