@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load',function() {
   // let defalutDom = $("#user-search-result")[0];
   let added_users = [];
-  let defaultDirectsHTML = $("#dm-user-search-result").children();
+  let defaultDirectsHTML = $("#dm-user-search-result").children().clone(true);
 
   function buildHtmlUser(user) {
       let html = `<li class="align-item_centered_flex contents__list__items" data-behavior="add_user" data-user-id="${ user.id }" data-user-name="${ user.name }">

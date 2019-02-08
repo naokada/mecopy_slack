@@ -10,6 +10,8 @@ class DirectsController < ApplicationController
     # grouped_contents = @channel.messages.order('created_at DESC')
     # grouped_contents_included = grouped_contents.map(&:content)
     # @grouped_contents = grouped_contents.group_by{|u| u.created_at.strftime('%Y/%m/%d')}
+    @direct_name = @direct.users.map(&:name).select{|name| name != current_user.name}.join(", ")
+    @directs = current_user.directs
     @message = Message.new
     # binding.pry
   end

@@ -12,6 +12,7 @@ html, body {
     background-color: $side_bg_cl;
     color: $side_font_cl;
     z-index: 1;
+    overflow: auto;
 
     h3 {
         color: $side_font_h_cl;
@@ -899,7 +900,7 @@ span.gray {
 }
 
 .hover-white:hover , i.fa-plus-circle:hover, i.fa-bell:hover, i.times-circle:hover {
-    color: white;
+    color: white !important;
 }
 
 .selected_channel, .selected_channel:hover {
