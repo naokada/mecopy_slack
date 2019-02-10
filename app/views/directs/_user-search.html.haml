@@ -1,7 +1,9 @@
 .user-search.dm-search
-  .user-search__field.flex
-    #dm-user-added.flex
-    %input{id:'dm-user-search-field', placeholder: '会話を探すか開始する', type:'text' }
+  .clearfix
+    .user-search__field.float-left.user-search__field-float.flex
+      #dm-user-added.flex
+      %input{id:'dm-user-search-field', placeholder: '会話を探すか開始する', type:'text' }
+    %input{type: 'submit', value: '開始', name: 'commit', class:'btn small-btn float-left', "data-disable-with": "開始"}
   #dm-user-search-result.contents__list.contents__list-user
     %ul
       - @users.each do |user|

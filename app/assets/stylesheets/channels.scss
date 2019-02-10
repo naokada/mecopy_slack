@@ -609,6 +609,26 @@ html, body {
     outline:none;
 }
 
+.small-btn {
+    width: 76px !important;
+    margin-left: 16px;
+}
+
+.btn:disabled {
+    background-color: $disabled_btn_cl;
+    color: $font_d_cl;
+}
+
+.float-left {
+    float: left;
+}
+
+.clearfix:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
 .search-box-btn {
     padding: 2px 0;
     border-radius: 5px;
@@ -688,6 +708,9 @@ html, body {
                     margin-right: 5px;
                 }
             }
+        }
+        &-float {
+            width: calc(100% - 92px);
         }
     }
 
