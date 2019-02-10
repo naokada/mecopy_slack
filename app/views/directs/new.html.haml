@@ -1,0 +1,13 @@
+.new_direct_wrapper
+	%button.back-btn
+		= fa_icon("times")
+		%p Esc
+	.contents
+		.contents__header
+			%h1 ダイレクトメッセージ
+		= form_with model: @direct do |f|
+			.field
+			.field
+				= render "user-search"
+			.flex
+				= f.submit "開始", class: "btn"

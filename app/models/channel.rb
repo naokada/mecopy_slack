@@ -1,4 +1,5 @@
 class Channel < ApplicationRecord
+    enum channel_type: [:public_ch, :private_ch]
     has_many :messages, dependent: :delete_all
     has_many :channel_users, dependent: :delete_all
     has_many :users, through: :channel_users

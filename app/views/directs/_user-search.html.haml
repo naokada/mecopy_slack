@@ -1,0 +1,10 @@
+.user-search.dm-search
+  .user-search__field.flex
+    #dm-user-added.flex
+    %input{id:'dm-user-search-field', placeholder: '会話を探すか開始する', type:'text' }
+  #dm-user-search-result.contents__list.contents__list-user
+    %ul
+      - @users.each do |user|
+        %li.align-item_centered_flex.contents__list__items{data:{ behavior:"add_user", user: {id: user.id, name: user.name}}}
+          = image_tag('default_prof1.png', class: "thumb_36")
+          %p #{user.name}

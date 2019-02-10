@@ -1,0 +1,34 @@
+.wrapper.flex
+  = render 'layouts/left_layout'
+  .main
+    .main__header.header.flex
+      .main__header__left
+        .main__header__left__title
+          %h3 #{@direct_name}
+          %ul.channel_small_info_list
+            %li #{fa_icon("star")}
+            %li #{fa_icon("user")} 1
+            %li #{fa_icon("thumb-tack")} 1
+            %li #{fa_icon("pencil")} トピックの追加
+        .main__header__info
+      .main__header__right.flex
+        .nav
+          = fa_icon("ellipsis-v")
+        = fa_icon("star")
+        = fa_icon("at")
+        .search-box-btn
+          = fa_icon("search")
+          %p 検索
+        .nav
+          = fa_icon("cog")
+        = fa_icon("info-circle")
+        = fa_icon("phone")
+    = render 'channels/flash'
+    #messages.main__field.flex{"data-channel_id": "#{@direct.id}", "data-channel_type": "direct"}
+      - @grouped_messages.keys.each do |date|
+        - @grouped_messages[date].each do |message|
+          = render partial: "messages/message", locals: { message: message }
+        .divider
+          %hr.divider__line
+          %p.divider__label #{date}
+    = render 'form'

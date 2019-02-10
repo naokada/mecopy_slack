@@ -12,6 +12,7 @@ html, body {
     background-color: $side_bg_cl;
     color: $side_font_cl;
     z-index: 1;
+    overflow: auto;
 
     h3 {
         color: $side_font_h_cl;
@@ -194,9 +195,9 @@ html, body {
 .main__field {
     flex-direction: column-reverse;
     height: calc(100vh - 61px - 66px);
-    flex-wrap: nowrap; /* [1] */
-    overflow-x: auto; /* [1] */
-    -webkit-overflow-scrolling: touch; /* [4] */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
@@ -350,7 +351,7 @@ html, body {
     }
 }
 
-#channels_wrapper, .new_channel_wrapper {
+#channels_wrapper, .new_channel_wrapper, .new_direct_wrapper {
     > button {
         position: absolute;
         background-color: white;
@@ -554,6 +555,12 @@ html, body {
             border: 1px solid $hovered_border_cl;
         }
 
+    }
+}
+
+.contents__list-user {
+    p {
+        margin-left: 15px;
     }
 }
 
@@ -881,13 +888,19 @@ span.gray {
     flex-direction: column;
 }
 
+.align-item_centered_flex {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
 .horizontal_centered_flex {
     display: flex;
     justify-content: center;
 }
 
 .hover-white:hover , i.fa-plus-circle:hover, i.fa-bell:hover, i.times-circle:hover {
-    color: white;
+    color: white !important;
 }
 
 .selected_channel, .selected_channel:hover {

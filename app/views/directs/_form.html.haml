@@ -1,0 +1,10 @@
+.main__form
+  .main__form__field
+    %a.file-field
+      = fa_icon("plus")
+    %input{placeholder: "#{@direct_name} へのメッセージ", "data-behavior": "channel_speaker"}
+    .main__form__buttons
+      %a.mention-field
+        = fa_icon("at")
+      %a.reaction-field
+        = fa_icon("heart")
