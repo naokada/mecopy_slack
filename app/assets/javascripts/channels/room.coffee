@@ -1,17 +1,18 @@
-document.addEventListener 'turbolinks:load', ->
-  App.room = App.cable.subscriptions.create { channel: "RoomChannel", channel_id: $('#messages').data('channel_id') },
-    connected: ->
+if (!App.order)
+  document.addEventListener 'turbolinks:load', ->
+    App.room = App.cable.subscriptions.create { channel: "RoomChannel", channel_id: $('#messages').data('channel_id'), channel_type: $('#messages').data('channel_type')},
+      connected: ->
 
-    disconnected: ->
+      disconnected: ->
 
-    received: (data) ->
-      $('#messages').prepend data['message']
-      $('#notice p').html("未読のメッセージがあります")
-      if isNoticeable() is true
-        $('#notice').removeClass("hidden")
+      received: (data) ->
+        $('#messages').prepend data['message']
+        $('#notice p').html("未読のメッセージがあります")
+        if isNoticeable() is true
+          $('#notice').removeClass("hidden")
 
-    speak: (message)->
-      @perform 'speak', message: message
+      speak: (message)->
+        @perform 'speak', message: message
 
 $(document).on 'keypress', '[data-behavior~=channel_speaker]', (event) ->
   if event.keyCode is 13 # return = send
