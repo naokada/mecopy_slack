@@ -336,7 +336,7 @@ html, body {
     }
 }
 
-#channels_wrapper, .new_channel_wrapper, #addtional_options_wrapper {
+#channels_wrapper, .new_channel_wrapper, #addtional_options_wrapper, .edit_channel_wrapper {
     position: absolute;
     top: 0;
     left:0;
@@ -351,7 +351,7 @@ html, body {
     }
 }
 
-#channels_wrapper, .new_channel_wrapper, .new_direct_wrapper {
+#channels_wrapper, .new_channel_wrapper, .new_direct_wrapper, .edit_channel_wrapper {
     > button {
         position: absolute;
         background-color: white;
@@ -617,10 +617,6 @@ html, body {
 .btn:disabled {
     background-color: $disabled_btn_cl;
     color: $font_d_cl;
-}
-
-.float-left {
-    float: left;
 }
 
 .clearfix:after {
@@ -967,7 +963,13 @@ span.gray {
     border-radius: 3px;
 }
 
+.float-left {
+    float: left;
+}
 
+.float-right {
+    float: right;
+}
 
 * {
     box-sizing: border-box;

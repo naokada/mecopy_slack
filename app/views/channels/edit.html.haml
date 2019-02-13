@@ -1,7 +1,14 @@
-%h1 Editing channel
+.edit_channel_wrapper
+	%button.back-btn
+		= fa_icon("times")
+		%p Esc
+	.contents
+		.contents__header
+			%h1 他のユーザーを ##{@channel.name}に招待する
+			= hidden_field_tag "added_users", "#{@channel.users.ids}"
+		= form_with model: @channel do |f|
+			.field
+				%br/
+				= render "user-search"
+			= f.submit "招待する", class: "btn small-btn float-right"
 
-= render 'form'
-
-= link_to 'Show', @channel
-\|
-= link_to 'Back', channels_path

@@ -1,6 +1,9 @@
 $(document).on('turbolinks:load',function() {
   // let defalutDom = $("#user-search-result")[0];
   let added_users = [];
+  if ($("#added_users").length === 1) {
+    added_users = $("#added_users").val().slice(1, -1).split(", ").map(x => parseInt(x));
+  }
 
   function buildHtmlUser(user) {
       let html = `<div  data-behavior="add_user" data-user-id="${ user.id }" data-user-name="${ user.name }">
