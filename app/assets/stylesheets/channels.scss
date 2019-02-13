@@ -947,6 +947,7 @@ span.gray {
     text-decoration: none;
     color: inherit;
 }
+
 .no_link_style:hover {
     background-color: inherit;
     color: inherit;
@@ -959,6 +960,13 @@ span.gray {
 .thumb_36 {
     height: 36px;
     width: 36px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.thumb_large {
+    height: 192px;
+    width: 192px;
     object-fit: cover;
     border-radius: 3px;
 }

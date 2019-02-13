@@ -144,3 +144,85 @@
     border-radius: 5px;
     border: 1px solid $font_cl;
 }
+
+.edit-profile {
+    &__field {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        bottom: 72px;
+        padding: 32px;
+        overflow-y: auto;
+    }
+    .field {
+        margin: initial;
+        margin-bottom: 13px;
+        > p {
+            color: $font_cl;
+            line-height: 1.25rem;
+            font-size: .9rem;
+        }
+    }
+    label {
+        font-size: 1rem;
+        margin-bottom: .25rem;
+    }
+    label span {
+        font-weight: 400;
+    }
+}
+
+.file_field {
+    input {
+        display: none;
+    }
+    img {
+        cursor: pointer;
+    }
+    > label {
+        position: relative;
+    }
+    &-hovered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        text-align: center;
+        height: 192px;
+        width: 192px;
+        top: calc(214px - 195px);
+        color: white;
+        i {
+            font-size: 30pt;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.5rem;
+            width: 80%;
+            margin: 0;
+        }
+    }
+}
+
+.file_field:hover {
+    .file_field-hovered {
+        display: flex;
+    }
+    img {
+        border: 3px solid $sky_cl;
+    }
+}
+
+.submit_field {
+    flex-direction: row-reverse;
+    position: fixed;
+    z-index: 3;
+    background-color: $bg_gray_cl;
+    bottom: 0;
+    padding: 16px;
+    height: 66px;
+    left: 0;
+    width: 100vw;
+}
+
