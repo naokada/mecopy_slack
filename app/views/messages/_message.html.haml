@@ -1,5 +1,8 @@
 .message.flex
-	= image_tag('default_prof1.png', class: "thumb_36")
+	- if (message.user.avator.attached?)
+		= image_tag(message.user.avator, class: 'thumb_36')
+	- else
+		= image_tag('default_prof1.png', class: 'thumb_36')
 	.message__contents
 		.message__user
 			%h4 #{message.user.name}

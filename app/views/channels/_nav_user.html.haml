@@ -1,6 +1,9 @@
 .nav__contents.nav_user
   .nav__contents__header.flex
-    = image_tag('default_prof1.png', class: "thumb_36")
+    - if (current_user.avator.attached?)
+      = image_tag(current_user.avator, class: 'thumb_36')
+    - else
+      = image_tag('default_prof1.png', class: 'thumb_36')
     %h2 #{current_user.name}
   %ul
     %li.item

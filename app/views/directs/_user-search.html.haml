@@ -8,5 +8,8 @@
     %ul
       - @users.each do |user|
         %li.align-item_centered_flex.contents__list__items{data:{ behavior:"add_user", user: {id: user.id, name: user.name}}}
-          = image_tag('default_prof1.png', class: "thumb_36")
+          - if (user.avator.attached?)
+            = image_tag(user.avator, class: 'thumb_36')
+          - else
+            = image_tag('default_prof1.png', class: 'thumb_36')
           %p #{user.name}
