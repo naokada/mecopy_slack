@@ -22,13 +22,13 @@ $(document).on 'keypress', '[data-behavior~=channel_speaker]', (event) ->
     scroll();
 
 isNoticeable = ->
-    if $('#notice')[0].classList.contains('hidden')
-      messagesDom = $("#messages")[0]
-      doch = messagesDom.scrollHeight; #ページ全体の高さ
-      winh = $("#messages").innerHeight(); #ウィンドウの高さ
-      bottom = doch - winh; #ページ全体の高さ - ウィンドウの高さ = ページの最下部位置
-      if bottom > $("#messages").scrollTop() #もし一番下にいなかったらtrueを返す
-        return true
-    return false
+  if $('#notice')[0].classList.contains('hidden')
+    messagesDom = $("#messages")[0]
+    doch = messagesDom.scrollHeight; #ページ全体の高さ
+    winh = $("#messages").innerHeight(); #ウィンドウの高さ
+    bottom = doch - winh; #ページ全体の高さ - ウィンドウの高さ = ページの最下部位置
+    if bottom > $("#messages").scrollTop() #もし一番下にいなかったらtrueを返す
+      return true
+  return false
 
 

@@ -1,7 +1,15 @@
 .main__form
   .main__form__field
-    %a.file-field
-      = fa_icon("plus")
+    .nav
+      %a.add_file_btn
+        = fa_icon("plus")
+      .nav__contents.nav__contents-upper
+        %ul
+          %p.item-caption Add a file from...
+          %li.item
+            %label{for: 'file_upload'}
+              %input{type: 'file', name: 'file', id: 'file_upload',class: 'hidden'}
+              %a #{fa_icon("laptop")} Your computer
     %input{placeholder: "##{@channel.name} へのメッセージ", "data-behavior": "channel_speaker"}
     .main__form__buttons
       %a.mention-field

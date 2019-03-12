@@ -285,7 +285,7 @@ html, body {
             color: $field_border_cl;
         }
     }
-    a.file-field {
+    a.add_file_btn {
         position: absolute;
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
@@ -302,7 +302,7 @@ html, body {
             font-size: 1.5em;
         }
     }
-    a.file-field:hover {
+    a.add_file_btn:hover {
         background-color: $side_second_r_cl;
         border: 2px solid $green_cl;
         i {
@@ -815,15 +815,30 @@ span.gray {
                     line-height: 28px;
                     color: $font_d_cl;
                 }
-                a:hover, input:hover {
+                i {
+                    color: $font_cl;
+                }
+            }
+            li.item:hover {
+                a, input, i {
                     background-color: inherit;
                     color: white;
                 }
+            }
+            p.item-caption {
+                padding: 4px 24px;
+                margin: 0;
+                font-size: 13px;
+                font-weight: 400;
             }
         }
         li.list_divider {
             border-bottom: 1px solid $border_cl;
             margin: 8px 0 7px;
+        }
+        &-upper {
+            bottom: 95px;
+            left: -150px;
         }
     }
     > i {
@@ -916,6 +931,12 @@ span.gray {
 .horizontal_centered_flex {
     display: flex;
     justify-content: center;
+}
+
+.centered_flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hover-white:hover , i.fa-plus-circle:hover, i.fa-bell:hover, i.times-circle:hover {
