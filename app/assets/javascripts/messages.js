@@ -20,8 +20,8 @@ document.addEventListener('turbolinks:load', function() {
             $(document).off('click');
         });
     });
-    $(".back-btn").on('click', goBack);
-    $(".exit-btn").on('click', function() {
+    $(".JS-back-btn").on('click', goBack);
+    $(".JS-exit-btn").on('click', function() {
         location.reload();
     });
 })

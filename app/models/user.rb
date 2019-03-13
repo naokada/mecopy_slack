@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :channels, through: :channel_users
   has_many :direct_users, dependent: :delete_all
   has_many :directs, through: :direct_users
+  has_one_attached :avator
 end

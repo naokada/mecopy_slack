@@ -1,0 +1,48 @@
+.channel-options.edit-profile
+  %button.exit-btn.JS-back-btn
+    = fa_icon("times")
+  .channel-options__header
+    %h1 プロフィールを編集する
+  = form_with model: @user, class: "edit-profile__field flex" do |f|
+    .field.file_field
+      = f.label :avator do
+        = f.label :avator, "プロフィール写真"
+        %br/
+        - if (@user.avator.attached?)
+          = image_tag(@user.avator, class: 'thumb_large')
+        - else
+          = image_tag('default_prof1.png', class: 'thumb_large')
+        = f.file_field :avator
+        .file_field-hovered.hidden
+          = fa_icon("camera")
+          %p プロフィール写真を変更
+    .field
+      = f.label :name, "氏名"
+      %br/
+      = f.text_field :name
+    .field
+      = f.label :nickname do
+        表示名
+        %span
+          （任意）
+      %br/
+      = f.text_field :nickname, placeholder: "#{@user.name}"
+      %p これは名字や名前、ニックネームなど、好きに設定できます。Slack でメンバーから呼ばれたい名前にしましょう。
+    .field
+      = f.label :role, "役職・担当"
+      %br/
+      = f.text_field :role, placeholder: "役職・担当"
+      %p UZEMI でのあなたの役割を説明しましょう。
+    .field
+      = f.label :phone, "電話番号"
+      %br/
+      = f.text_field :phone, placeholder: "(123)555-5555"
+      %p 電話番号を入力してください。
+    .field
+      = f.label :skype, "Skype"
+      %br/
+      = f.text_field :skype, placeholder: "Skype"
+      %p これはあなたのプロフィールに表示されます。
+    .submit_field.flex
+      = f.submit "変更を保存する", class: "btn"
+      %button.btn.cancel-btn キャンセル

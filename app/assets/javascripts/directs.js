@@ -97,6 +97,7 @@ $("#dm-user-added").on("click", '[data-behavior~=remove_user]', function() {
 
   if (added_users.length == 0) {
     $("#dm-user-search-result").html(buildHTMLUnAddedUser());
+    switchSubmitBtn(true);
   }
 });
 $("a.user-search-remove").on("click", function() {
@@ -117,3 +118,6 @@ children.each(function(i, child) {
 return result;
 }
 
+function switchSubmitBtn(flag) {
+  $("input[type=submit]").attr("disabled", true);
+}

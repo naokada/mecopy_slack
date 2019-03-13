@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   mount ActionCable.server => '/cable'
+  resources :users, only: [:edit, :update]
   resources :channels do
     collection do
       get :search_user

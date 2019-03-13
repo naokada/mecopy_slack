@@ -81,5 +81,6 @@ gem 'font-awesome-rails'
 
 gem 'devise'
 
-gem 'jquery-rails' 
+gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem "aws-sdk-s3", require: false

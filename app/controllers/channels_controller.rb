@@ -13,7 +13,6 @@ class ChannelsController < ApplicationController
     @channels = Channel.all
     @joined_channels = current_user.channels.order('name ASC')
     @unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
-    @channel = Channel.find(params[:id])
     # @grouped_messages = @channel.messages.includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     grouped_contents = @channel.feed_contents.order('created_at DESC')
     grouped_contents_included = grouped_contents.map(&:content)
@@ -99,8 +98,19 @@ class ChannelsController < ApplicationController
   # PATCH/PUT /channels/1
   # PATCH/PUT /channels/1.json
   def update
+    isSaved = true
+    user_ids = channel_params[:user_ids]
+
+    user_ids.each do |user_id|
+      if (!@channel.users.exists?(user_id))
+        channel_user = ChannelUser.new(channel_id: @channel.id, user_id:user_id)
+        if (!channel_user.save)
+          isSaved = false
+        end
+      end
+    end
     respond_to do |format|
-      if @channel.update(channel_params)
+      if isSaved
         format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
         format.json { render :show, status: :ok, location: @channel }
       else

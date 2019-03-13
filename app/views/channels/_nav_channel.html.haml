@@ -3,7 +3,7 @@
     %li.item
       %a Jump to date...
     %li.item
-      %a Invite new members to join...
+      = link_to "Invite new members to join...", edit_channel_path(@channel.id), method: :get, class: "button-to-link"
     %li.item
       %a View channel details
     - if (@channel.users.exists?(current_user.id))
