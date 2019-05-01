@@ -1,6 +1,5 @@
 class ChannelsController < ApplicationController
-  before_action :set_channel, only: [:show, :edit, :update, :destroy]
-  before_action :set_channels, only: [:index, :show]
+  before_action :set_channel, only: [:edit, :update, :destroy]
 
   # GET /channels
   # GET /channels.json
@@ -16,7 +15,7 @@ class ChannelsController < ApplicationController
     @grouped_contents = grouped_contents.group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     @message = Message.new
   end
-
+ 
   # GET /channels/new
   def new
     @channel = Channel.new
