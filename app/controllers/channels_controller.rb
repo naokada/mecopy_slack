@@ -10,15 +10,11 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
-    @channels = Channel.all
     @joined_channels = current_user.channels.order('name ASC')
-    @unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
-    # @grouped_messages = @channel.messages.includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     grouped_contents = @channel.feed_contents.order('created_at DESC')
     grouped_contents_included = grouped_contents.map(&:content)
     @grouped_contents = grouped_contents.group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     @message = Message.new
-    # binding.pry
   end
 
   # GET /channels/new
@@ -39,7 +35,8 @@ class ChannelsController < ApplicationController
     @joined_channels = Channel.where id: @channels.ids & @current_user_channels_ids
     @unjoined_channels = Channel.where id: @channels.ids - @current_user_channels_ids
     respond_to do |format|
-      format.json { render 'new', json: [@unjoined_channels, @joined_channels] }
+      format.html
+      format.json { render 'search', json: [@unjoined_channels, @joined_channels] }
     end
   end
 

@@ -59,6 +59,7 @@ html, body {
         }
         * {
             font-size: 12pt;
+            color: $side_font_cl;
         }
         &__title {
             padding: 0 16px;
@@ -973,6 +974,7 @@ span.gray {
     background-color: inherit;
     color: inherit;
 }
+
 
 .scroll {
     overflow: scroll;

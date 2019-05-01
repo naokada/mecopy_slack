@@ -11,7 +11,7 @@
   .left__threads
   .left__channels.groups
     .channels.groups__title
-      %p.hover-white チャンネル
+      = link_to('チャンネル', search_channels_path, class:'hover-white no_link_style font-white')
       = fa_icon("plus-circle")
     %ul.groups__list
       - @joined_channels.each do |channel|
@@ -44,4 +44,3 @@
     .groups__title
       %p.hover-white App
       = fa_icon("plus-circle")
-= render 'channels/channels'
