@@ -8,7 +8,7 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    message = Message.create!(content: data['message'], channel_id: params['channel_id'], message_for: params['channel_type'], user_id: current_user.id)
+    message = Message.create!(content: data['message'], channel_id: params['channel_id'], user_id: current_user.id)
     # message.feed_content = FeedContent.create(channel_id: params['channel_id'], updated_at: message.updated_at)
   end
 end

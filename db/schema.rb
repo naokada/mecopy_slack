@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_01_140209) do
+ActiveRecord::Schema.define(version: 2019_05_01_140423) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 2019_05_01_140209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "channel_type", default: 0
+  end
+
+  create_table "direct_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "content"
+    t.integer "direct_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "direct_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

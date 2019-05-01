@@ -1,16 +1,10 @@
 class DirectsController < ApplicationController
   before_action :set_channels, only: [:show]
-  # GET /channels/1
-  # GET /channels/1.json
   def show
     @direct = Direct.find(params[:id])
-    @grouped_messages = Message.where(channel_id: @direct.id, message_for: "direct").includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
-    # grouped_contents = @channel.messages.order('created_at DESC')
-    # grouped_contents_included = grouped_contents.map(&:content)
-    # @grouped_contents = grouped_contents.group_by{|u| u.created_at.strftime('%Y/%m/%d')}
+    @grouped_messages = DirectMessage.where(direct_id: @direct.id).includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     @direct_name = @direct.users.map(&:name).select{|name| name != current_user.name}.join(", ")
-    @message = Message.new
-    # binding.pry
+    @message = DirectMessage.new
   end
 
   def new
