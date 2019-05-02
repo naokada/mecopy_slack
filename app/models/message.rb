@@ -1,4 +1,5 @@
 class Message < ApplicationRecord
+	enum type: [:normal, :participate]
 	belongs_to :channel
 	belongs_to :user
 	validates :content, presence: true
