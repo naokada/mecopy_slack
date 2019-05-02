@@ -24,7 +24,7 @@
         = fa_icon("info-circle")
         = fa_icon("phone")
     = render 'channels/flash'
-    #messages.main__field.flex{"data-channel_id": "#{@direct.id}", "data-channel_type": "direct"}
+    #messages.main__field.flex{"data-direct_id": "#{@direct.id}"}
       - @grouped_messages.keys.each do |date|
         - @grouped_messages[date].each do |message|
           = render partial: "messages/message", locals: { message: message }

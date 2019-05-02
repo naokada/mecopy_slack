@@ -1,5 +1,6 @@
 class ChannelsController < ApplicationController
-  before_action :set_channel, only: [:edit, :update, :destroy]
+  before_action :set_channel, only: [:edit, :update, :destroy, :show]
+  before_action :set_channels, only: [:index, :edit, :update, :destroy, :show]
 
   # GET /channels
   # GET /channels.json

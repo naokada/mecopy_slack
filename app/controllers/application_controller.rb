@@ -23,9 +23,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def set_channels
-		@channels = Channel.order('name ASC')
     @joined_channels = current_user.channels
-		@unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
 		@directs = current_user.directs
 	end
 

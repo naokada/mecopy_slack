@@ -1,8 +1,6 @@
 .message.flex
 	- if (message.user.avator.attached?)
-		-# = image_tag(polymorphic_url(current_user.avator), class: 'thumb_36')
-		-# = image_tag(message.user.avator, class: 'thumb_36')
-		= image_tag root_url+rails_blob_path(current_user.avator), class:'thumb_36'
+		= image_tag message.user.avator, class:'thumb_36'
 	- else
 		= image_tag('default_prof1.png', class: 'thumb_36')
 	.message__contents
