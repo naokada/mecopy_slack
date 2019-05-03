@@ -43,7 +43,8 @@ class ChannelsController < ApplicationController
   def participate
     @channel = Channel.find(participate_params[:channel_id])
     if (!@channel.users.exists?(current_user.id))
-      @channel_user = ChannelUser.new(channel_id: @channel.id, user_id:current_user.id)
+      @channel_user = ChannelUser.new(channel_id: @channel.id, user_id: current_user.id)
+      current_user.messages.create(content: "PARTICIPATE", content_type: :participate, channel_id: params[:id])
       respond_to do |format|
         if @channel_user.save
           format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
@@ -57,10 +58,8 @@ class ChannelsController < ApplicationController
   end
 
   def unparticipate
-    # binding.pry
-    @channel = Channel.find(params[:id])
-    @channel_user = ChannelUser.where(user_id: current_user.id, channel_id: @channel.id)
-    ChannelUser.destroy(@channel_user.ids[0])
+    ChannelUser.where(user_id: current_user.id, channel_id: params[:id]).destroy_all
+    current_user.messages.create(content: "UNPARTICIPATE", content_type: :unparticipate, channel_id: params[:id])
     respond_to do |format|
       format.html { redirect_to channels_path}
       format.json { head :no_content }

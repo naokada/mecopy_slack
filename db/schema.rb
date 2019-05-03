@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2019_05_02_145720) do
     t.datetime "updated_at", null: false
     t.integer "channel_id"
     t.integer "user_id"
-    t.integer "type", default: 0, null: false
+    t.integer "content_type", default: 0, null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
