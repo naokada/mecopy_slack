@@ -72,12 +72,15 @@ class ChannelsController < ApplicationController
     @channel = Channel.new(name: channel_params[:name])
     channel_params[:user_ids] == nil ? user_ids = [] : user_ids = channel_params[:user_ids]
     user_ids << current_user.id
+    isSaved = @channel.save
 
+    ChannelUser.transaction do
+      user_ids.each do |user_id|
+        @channel.users << User.find(user_id)
+      end
+    end
     respond_to do |format|
-      if @channel.save
-        user_ids.each do |user_id|
-          @channel.users << User.find(user_id)
-        end
+      if isSaved
         format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
         format.json { render :show, status: :created, location: @channel }
       else
@@ -91,9 +94,10 @@ class ChannelsController < ApplicationController
   # PATCH/PUT /channels/1.json
   def update
     user_ids = channel_params[:user_ids]
-
-    user_ids.each do |user_id|
-      ChannelUser.find_or_create_by(channel_id: @channel.id, user_id:user_id)
+    ChannelUser.transaction do
+      user_ids.each do |user_id|
+        ChannelUser.find_or_create_by(channel_id: @channel.id, user_id:user_id)
+      end
     end
     respond_to do |format|
       format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
