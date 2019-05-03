@@ -10,7 +10,6 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
-    @joined_channels = current_user.channels.order('name ASC')
     grouped_contents = @channel.messages.includes(:user).order('created_at DESC')
     @grouped_contents = grouped_contents.group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     @message = Message.new
@@ -43,7 +42,6 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(participate_params[:channel_id])
     if (!@channel.users.exists?(current_user.id))
       @channel_user = ChannelUser.new(channel_id: @channel.id, user_id: current_user.id)
-      current_user.messages.create(content: "PARTICIPATE", content_type: :participate, channel_id: params[:id])
       respond_to do |format|
         if @channel_user.save
           format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
@@ -58,7 +56,6 @@ class ChannelsController < ApplicationController
 
   def unparticipate
     ChannelUser.where(user_id: current_user.id, channel_id: params[:id]).destroy_all
-    current_user.messages.create(content: "UNPARTICIPATE", content_type: :unparticipate, channel_id: params[:id])
     respond_to do |format|
       format.html { redirect_to channels_path}
       format.json { head :no_content }
@@ -73,13 +70,13 @@ class ChannelsController < ApplicationController
   # POST /channels.json
   def create
     @channel = Channel.new(name: channel_params[:name])
-    user_ids = channel_params[:user_ids]
+    channel_params[:user_ids] == nil ? user_ids = [] : user_ids = channel_params[:user_ids]
     user_ids << current_user.id
 
     respond_to do |format|
       if @channel.save
         user_ids.each do |user_id|
-          ChannelUser.create(channel_id: @channel.id, user_id:user_id)
+          @channel.users << User.find(user_id)
         end
         format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
         format.json { render :show, status: :created, location: @channel }
@@ -99,9 +96,7 @@ class ChannelsController < ApplicationController
     user_ids.each do |user_id|
       if (!@channel.users.exists?(user_id))
         channel_user = ChannelUser.new(channel_id: @channel.id, user_id:user_id)
-        if (!channel_user.save)
-          isSaved = false
-        end
+        isSaved = channel_user.save
       end
     end
     respond_to do |format|
@@ -139,5 +134,4 @@ class ChannelsController < ApplicationController
     def participate_params
       params.permit(:channel_id)
     end
-
 end
