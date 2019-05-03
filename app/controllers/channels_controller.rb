@@ -90,23 +90,14 @@ class ChannelsController < ApplicationController
   # PATCH/PUT /channels/1
   # PATCH/PUT /channels/1.json
   def update
-    isSaved = true
     user_ids = channel_params[:user_ids]
 
     user_ids.each do |user_id|
-      if (!@channel.users.exists?(user_id))
-        channel_user = ChannelUser.new(channel_id: @channel.id, user_id:user_id)
-        isSaved = channel_user.save
-      end
+      ChannelUser.find_or_create_by(channel_id: @channel.id, user_id:user_id)
     end
     respond_to do |format|
-      if isSaved
-        format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
-        format.json { render :show, status: :ok, location: @channel }
-      else
-        format.html { render :edit }
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
+      format.json { render :show, status: :ok, location: @channel }
     end
   end
 

@@ -29,10 +29,6 @@
       %p.no_link_style.hover-white ダイレクトメッセージ
       = fa_icon("plus-circle")
     %ul.groups__list
-      -# %li
-      -#   %a #{fa_icon("circle")} slackbot
-      -# %li
-      -#   %a #{fa_icon("circle")} naokada
       - @directs.each do |direct|
         - if @direct.present? && direct.id == @direct.id
           %li.selected_channel
