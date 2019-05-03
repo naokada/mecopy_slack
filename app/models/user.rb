@@ -10,4 +10,11 @@ class User < ApplicationRecord
   has_many :direct_users, dependent: :delete_all
   has_many :directs, through: :direct_users
   has_one_attached :avator
+
+  after_save :add_default_dm
+
+  def add_default_dm
+    direct = Direct.create
+    direct.users << self
+  end
 end

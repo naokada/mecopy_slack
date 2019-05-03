@@ -3,8 +3,6 @@ class Direct < ApplicationRecord
   has_many :users, through: :direct_users
   has_many :messages
 
-  # before_validation: :is_unique
-
   # Return an id of duplicated direct message room when
   # a given user has a direct message room with given users
   # Otherwise, it returns -1
@@ -19,7 +17,7 @@ class Direct < ApplicationRecord
       existed_directs << {id: user_direct.id, user_ids: user_direct.user_ids.sort}
     end
 
-    duplicated_dm = existed_directs.select {|existed_direct| existed_direct[:user_ids] == user_ids}
+    duplicated_dm = existed_directs.select {|existed_direct| existed_direct[:users_ids] == user_ids}
     if duplicated_dm.length > 0
       return duplicated_dm[0][:id]
     else
