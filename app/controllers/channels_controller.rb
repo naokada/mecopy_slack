@@ -11,12 +11,11 @@ class ChannelsController < ApplicationController
   # GET /channels/1.json
   def show
     @joined_channels = current_user.channels.order('name ASC')
-    grouped_contents = @channel.feed_contents.order('created_at DESC')
-    grouped_contents_included = grouped_contents.map(&:content)
+    grouped_contents = @channel.messages.includes(:user).order('created_at DESC')
     @grouped_contents = grouped_contents.group_by{|u| u.created_at.strftime('%Y/%m/%d')}
     @message = Message.new
   end
- 
+
   # GET /channels/new
   def new
     @channel = Channel.new

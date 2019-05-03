@@ -27,7 +27,7 @@
     #messages.main__field.flex{"data-direct_id": "#{@direct.id}"}
       - @grouped_messages.keys.each do |date|
         - @grouped_messages[date].each do |message|
-          = render partial: "messages/message", locals: { message: message }
+          = render partial: "message", locals: { message: message }
         .divider
           %hr.divider__line
           %p.divider__label #{date}

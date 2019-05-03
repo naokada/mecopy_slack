@@ -30,10 +30,7 @@
         .participation_margin
       - @grouped_contents.keys.each do |date|
         - @grouped_contents[date].each do |content|
-          - if content.content_type == "Message"
-            = render partial: "messages/message", locals: { message: content.content }
-          - elsif content.content_type == "ChannelUser"
-            = render partial: "participation", locals: { channel_user: content.content }
+          = render partial: "messages/message", locals: { message: content }
         .divider
           %hr.divider__line
           %p.divider__label #{date}

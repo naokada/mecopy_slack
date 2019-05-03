@@ -7,7 +7,7 @@ class DirectMessageBroadcastJob < ApplicationJob
 
   private
     def render_direct_message(direct_message)
-      ApplicationController.renderer.render(partial: 'messages/message', locals: {message: direct_message})
+      ApplicationController.renderer.render(partial: 'directs/message', locals: {message: direct_message})
     end
 end
 

@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2019_05_02_145720) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "channel_type", default: 0
+    t.integer "channel_type", default: 0, null: false
   end
 
   create_table "direct_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -67,14 +67,6 @@ ActiveRecord::Schema.define(version: 2019_05_02_145720) do
   end
 
   create_table "directs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "feed_contents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "content_id"
-    t.string "content_type"
-    t.integer "channel_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
