@@ -3,7 +3,7 @@ class DirectsController < ApplicationController
   def show
     @direct = Direct.find(params[:id])
     @grouped_messages = DirectMessage.where(direct_id: @direct.id).includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
-    @direct_name = @direct.users.map(&:name).select{|name| name != current_user.name}.join(", ")
+    @direct_name = @direct.get_name(current_user)
     @message = DirectMessage.new
   end
 

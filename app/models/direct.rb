@@ -1,4 +1,5 @@
 class Direct < ApplicationRecord
+  enum dm_type: [:normal, :self_dm]
   has_many :direct_users, dependent: :delete_all
   has_many :users, through: :direct_users
   has_many :messages
@@ -23,5 +24,14 @@ class Direct < ApplicationRecord
     else
       return -1
     end
+  end
+
+  def get_name(user)
+    if self.dm_type == self
+      return user.name
+    else
+      return "#{self.users.map(&:name).select{|name| name != user.name}.join(", ")}"
+    end
+    return name
   end
 end

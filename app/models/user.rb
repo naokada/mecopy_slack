@@ -14,7 +14,7 @@ class User < ApplicationRecord
   after_save :add_default_dm
 
   def add_default_dm
-    direct = Direct.create
+    direct = Direct.create(dm_type: :self_dm)
     direct.users << self
   end
 end
