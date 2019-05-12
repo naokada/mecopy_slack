@@ -1,4 +1,4 @@
-if (!App.order)
+if (!App.direct)
   document.addEventListener 'turbolinks:load', ->
     App.direct = App.cable.subscriptions.create { channel: "DirectChannel", direct_id: $('#messages').data('direct_id')},
       connected: ->

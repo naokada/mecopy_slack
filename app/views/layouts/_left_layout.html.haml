@@ -39,10 +39,10 @@
       - @directs.each do |direct|
         - if @direct.present? && direct.id == @direct.id
           %li.selected_channel
-            = link_to(direct.get_name(current_user), direct_path(direct))
+            = link_to(direct.get_name(current_user), direct_path(direct), class: 'overflow-text')
         - else
-          %li
-            = link_to(direct.get_name(current_user), direct_path(direct))
+          %li.overflow-text
+            = link_to(direct.get_name(current_user), direct_path(direct), class: 'overflow-text')
   .left__apps.groups
     .groups__title
       %p.hover-white App

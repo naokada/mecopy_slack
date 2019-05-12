@@ -1,4 +1,4 @@
-if (!App.order)
+if (!App.room)
   document.addEventListener 'turbolinks:load', ->
     App.room = App.cable.subscriptions.create { channel: "RoomChannel", channel_id: $('#messages').data('channel_id')},
       connected: ->
