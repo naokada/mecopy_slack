@@ -7,7 +7,7 @@
           %h3 ##{@channel.name}
           %ul.channel_small_info_list
             %li #{fa_icon("star")}
-            %li #{fa_icon("user")} #{@channel.users.length}
+            %li #{fa_icon("user")} #{@channel.users.count}
             %li #{fa_icon("thumb-tack")} 1
             %li #{fa_icon("pencil")} トピックの追加
         .main__header__info
@@ -25,15 +25,12 @@
         = fa_icon("info-circle")
         = fa_icon("phone")
     = render 'flash'
-    #messages.main__field.flex{"data-channel_id": "#{@channel.id}", "data-channel_type": "channel"}
+    #messages.main__field.flex{"data-channel_id": "#{@channel.id}", "data-channel_type": "#{@channel.channel_type}"}
       - if (!@channel.users.exists?(current_user.id))
         .participation_margin
       - @grouped_contents.keys.each do |date|
         - @grouped_contents[date].each do |content|
-          - if content.content_type == "Message"
-            = render partial: "messages/message", locals: { message: content.content }
-          - elsif content.content_type == "ChannelUser"
-            = render partial: "participation", locals: { channel_user: content.content }
+          = render partial: "messages/message", locals: { message: content }
         .divider
           %hr.divider__line
           %p.divider__label #{date}

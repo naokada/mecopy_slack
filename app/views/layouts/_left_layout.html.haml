@@ -6,13 +6,13 @@
     = fa_icon("bell")
     .left__info__user
       = fa_icon("circle")
-      %p #{current_user.name}
+      %p #{current_user.name}
     = render 'channels/nav_user'
   .left__threads
   .left__channels.groups
     .channels.groups__title
-      %p.hover-white チャンネル
-      = fa_icon("plus-circle")
+      = link_to('チャンネル', search_channels_path, class:'hover-white no_link_style font-white')
+      = link_to(fa_icon("plus-circle"), new_channel_path)
     %ul.groups__list
       - @joined_channels.each do |channel|
         - if @channel.present? && channel.id == @channel.id
@@ -29,19 +29,21 @@
       %p.no_link_style.hover-white ダイレクトメッセージ
       = fa_icon("plus-circle")
     %ul.groups__list
-      -# %li
-      -#   %a #{fa_icon("circle")} slackbot
-      -# %li
-      -#   %a #{fa_icon("circle")} naokada
+      - if @self_dm.present?
+        - if @direct.present? && @self_dm.id == @direct.id
+          %li.selected_channel
+            = link_to(@self_dm.get_name(current_user), direct_path(@self_dm))
+        - else
+          %li
+            = link_to(@self_dm.get_name(current_user), direct_path(@self_dm))
       - @directs.each do |direct|
         - if @direct.present? && direct.id == @direct.id
           %li.selected_channel
-            = link_to("#{direct.users.map(&:name).select{|name| name != current_user.name}.join(", ")}", direct_path(direct.id))
+            = link_to(direct.get_name(current_user), direct_path(direct), class: 'overflow-text')
         - else
-          %li
-            = link_to("#{direct.users.map(&:name).select{|name| name != current_user.name}.join(", ")}", direct_path(direct.id))
+          %li.overflow-text
+            = link_to(direct.get_name(current_user), direct_path(direct), class: 'overflow-text')
   .left__apps.groups
     .groups__title
       %p.hover-white App
       = fa_icon("plus-circle")
-= render 'channels/channels'

@@ -1,22 +1,22 @@
-if (!App.room)
+if (!App.direct)
   document.addEventListener 'turbolinks:load', ->
-    App.room = App.cable.subscriptions.create { channel: "RoomChannel", channel_id: $('#messages').data('channel_id')},
+    App.direct = App.cable.subscriptions.create { channel: "DirectChannel", direct_id: $('#messages').data('direct_id')},
       connected: ->
 
       disconnected: ->
 
       received: (data) ->
-        $('#messages').prepend data['message']
+        $('#messages').prepend data['direct_message']
         $('#notice p').html("未読のメッセージがあります")
         if isNoticeable() is true
           $('#notice').removeClass("hidden")
 
-      speak: (message)->
-        @perform 'speak', message: message
+      speak: (direct_message)->
+        @perform 'speak', direct_message: direct_message
 
-$(document).on 'keypress', '[data-behavior~=channel_speaker]', (event) ->
+$(document).on 'keypress', '[data-behavior~=direct_speaker]', (event) ->
   if event.keyCode is 13 # return = send
-    App.room.speak event.target.value
+    App.direct.speak event.target.value
     event.target.value = ''
     event.preventDefault()
     scroll();

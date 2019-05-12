@@ -4,7 +4,7 @@
     .main__header.header.flex
       .main__header__left
         .main__header__left__title
-          %h3 #{@direct_name}
+          %h3.overflow-text #{@direct_name}
           %ul.channel_small_info_list
             %li #{fa_icon("star")}
             %li #{fa_icon("user")} #{@direct.users.length}
@@ -24,10 +24,10 @@
         = fa_icon("info-circle")
         = fa_icon("phone")
     = render 'channels/flash'
-    #messages.main__field.flex{"data-channel_id": "#{@direct.id}", "data-channel_type": "direct"}
+    #messages.main__field.flex{"data-direct_id": "#{@direct.id}"}
       - @grouped_messages.keys.each do |date|
         - @grouped_messages[date].each do |message|
-          = render partial: "messages/message", locals: { message: message }
+          = render partial: "message", locals: { message: message }
         .divider
           %hr.divider__line
           %p.divider__label #{date}

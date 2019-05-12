@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FeedContentTest < ActiveSupport::TestCase
+class DirectMessageBroadcastJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end

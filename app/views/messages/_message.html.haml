@@ -1,11 +1,16 @@
 .message.flex
 	- if (message.user.avator.attached?)
-		= image_tag(message.user.avator, class: 'thumb_36')
+		= image_tag message.user.avator, class:'thumb_36'
 	- else
 		= image_tag('default_prof1.png', class: 'thumb_36')
 	.message__contents
 		.message__user
 			%h4 #{message.user.name}
 			%p.message__time #{message.created_at.strftime('%H:%M')}
-		%p.message__text #{message.content}
-	-# %p.message__notice #generalに参加しました。
+		- if message.content_type == "normal"
+			%p.message__text #{message.content}
+		- elsif message.content_type == "participate"
+			%p.message__notice ##{message.channel.name} に参加しました。
+		- elsif message.content_type == "unparticipate"
+			%p.message__notice ##{message.channel.name} から退出しました。
+

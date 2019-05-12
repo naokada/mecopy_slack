@@ -23,79 +23,78 @@ $(document).on('turbolinks:load',function() {
   }
 
   $("#user-search-field").on("keyup", function(e) {
-  e.preventDefault();
-  let input = $.trim($(this).val());
+    e.preventDefault();
+    let input = $.trim($(this).val());
 
-  $.ajax({
-    type: 'GET',
-    url: "/channels/search_user",
-    data: ("keyword=" + input),
-    processData: false,
-    contentType: false,
-    dataType: 'json'
-  })
+    $.ajax({
+      type: 'GET',
+      url: "/channels/search_user",
+      data: ("keyword=" + input),
+      processData: false,
+      contentType: false,
+      dataType: 'json'
+    })
 
-  .done(function(data) {
-    let search_list = $("#user-search-result")
-    search_list.empty();
+    .done(function(data) {
+      let search_list = $("#user-search-result")
+      search_list.empty();
 
-    if (input.length !== 0) {
-      let users = $(data);
-      users = Object.values(users);
-      let count = 0;
-      users.pop();
-      users.forEach(function(user) {
-        if (added_users.indexOf(user["id"]) == -1){
-          let html = buildHtmlUser(user);
-          search_list.append(html);
-          count++;
+      if (input.length !== 0) {
+        let users = $(data);
+        users = Object.values(users);
+        let count = 0;
+        users.pop();
+        users.forEach(function(user) {
+          if (added_users.indexOf(user["id"]) == -1){
+            let html = buildHtmlUser(user);
+            search_list.append(html);
+            count++;
+          }
+        });
+        if (count > 0) {
+          removeHidden($("#user-search-result")[0]);
         }
-      });
-      if (count > 0) {
-        removeHidden($("#user-search-result")[0]);
       }
-    }
-  })
-  .fail(function() {
-    alert("ユーザー検索に失敗しました");
-  })
-});
-
-$("#user-search-result").on("click",'[data-behavior~=add_user]', function() {
-  let added_list = $("#user-added")
-  let user = $(this);
-  let html = buildHtmlAddedUser(user);
-  added_users.push(user.data("user-id"));
-  added_list.append(html);
-  user.html("").css({'border':'none'});
-  if (isResultEmpty()) {
-    addHidden($("#user-search-result")[0]);
-  }
-});
-
-$("#user-added").on("click", '[data-behavior~=remove_user]', function() {
-  let user = $(this);
-
-  added_users = added_users.filter(function( item ) {
-    return item != user.children("input").val();
+    })
+    .fail(function() {
+      alert("ユーザー検索に失敗しました");
+    })
   });
 
-  user.html("").css({'border':'none'});
-});
-$("a.user-search-remove").on("click", function() {
-  let user = $(this).parent();
-  user.html("").css({'border':'none'});
-});
+  $("#user-search-result").on("click",'[data-behavior~=add_user]', function() {
+    let added_list = $("#user-added")
+    let user = $(this);
+    let html = buildHtmlAddedUser(user);
+    added_users.push(user.data("user-id"));
+    added_list.append(html);
+    user.html("").css({'border':'none'});
+    if (isResultEmpty()) {
+      addHidden($("#user-search-result")[0]);
+    }
+  });
 
-});
+  $("#user-added").on("click", '[data-behavior~=remove_user]', function() {
+    let user = $(this);
 
-function isResultEmpty() {
-let children = $("#user-search-result").children();
-let result = true;
-children.each(function(i, child) {
-  if (child.style.border != "none") {
-    result = false;
+    added_users = added_users.filter(function( item ) {
+      return item != user.children("input").val();
+    });
+
+    user.html("").css({'border':'none'});
+  });
+  $("a.user-search-remove").on("click", function() {
+    let user = $(this).parent();
+    user.html("").css({'border':'none'});
+  });
+
+  function isResultEmpty() {
+  let children = $("#user-search-result").children();
+  let result = true;
+  children.each(function(i, child) {
+    if (child.style.border != "none") {
+      result = false;
+    }
+  });
+  return result;
   }
 });
-return result;
-}

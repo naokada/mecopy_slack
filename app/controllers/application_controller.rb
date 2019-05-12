@@ -23,19 +23,17 @@ class ApplicationController < ActionController::Base
 	end
 
 	def set_channels
-		@channels = Channel.order('name ASC')
     @joined_channels = current_user.channels
-		@unjoined_channels = Channel.where id: @channels.ids - @joined_channels.ids
-		@directs = current_user.directs
+		@directs = current_user.directs.normal
+		@self_dm = current_user.directs.self_dm.first
 	end
 
 	private
     def set_time_zone(&block)
       Time.use_zone(current_user.time_zone, &block)
     end
- 
+
     def user_time_zone_present?
       current_user.try(:time_zone).present?
     end
-
 end
