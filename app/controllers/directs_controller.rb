@@ -2,8 +2,7 @@ class DirectsController < ApplicationController
   before_action :set_channels, only: [:show]
   def show
     @direct = Direct.find(params[:id])
-    @grouped_messages = DirectMessage.where(direct_id: @direct.id).includes(:user).order('created_at DESC').group_by{|u| u.created_at.strftime('%Y/%m/%d')}
-    @direct_name = @direct.get_name(current_user)
+    @grouped_messages = DirectMessage.grouped_in_direct(params[:id])
     @message = DirectMessage.new
   end
 
@@ -20,7 +19,7 @@ class DirectsController < ApplicationController
       @direct = Direct.create
       DirectUser.transaction do
         user_ids.each do |user_id|
-          DirectUser.create(direct_id: @direct.id, user_id:user_id)
+          DirectUser.create!(direct_id: @direct.id, user_id:user_id)
         end
       end
       respond_to do |format|

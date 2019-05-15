@@ -8,6 +8,6 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    message = Message.create!(content: data['message'], channel_id: params['channel_id'], user_id: current_user.id)
+    message = Message.create(content: data['message'], channel_id: params['channel_id'], user_id: current_user.id)
   end
 end

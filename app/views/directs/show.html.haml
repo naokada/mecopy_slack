@@ -4,7 +4,7 @@
     .main__header.header.flex
       .main__header__left
         .main__header__left__title
-          %h3.overflow-text #{@direct_name}
+          %h3.overflow-text #{@direct.get_name(current_user)}
           %ul.channel_small_info_list
             %li #{fa_icon("star")}
             %li #{fa_icon("user")} #{@direct.users.length}
@@ -31,4 +31,4 @@
         .divider
           %hr.divider__line
           %p.divider__label #{date}
-    = render 'form'
+    = render 'form', direct_name: @direct.get_name(current_user)

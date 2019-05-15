@@ -53,9 +53,9 @@ class ChannelsController < ApplicationController
   end
 
   def unparticipate
-    ChannelUser.where(user_id: current_user.id, channel_id: params[:id]).destroy_all
+    ChannelUser.where_user_channel(current_user.id, params[:id]).destroy_all
     respond_to do |format|
-      format.html { redirect_to channels_path}
+      format.html { redirect_to channel_path(params)}
       format.json { head :no_content }
     end
   end
@@ -68,7 +68,7 @@ class ChannelsController < ApplicationController
   # POST /channels.json
   def create
     @channel = Channel.new(name: channel_params[:name])
-    channel_params[:user_ids] == nil ? user_ids = [] : user_ids = channel_params[:user_ids]
+    user_ids = channel_params[:user_ids].nil? ? [] : channel_params[:user_ids]
     user_ids << current_user.id
     isSaved = @channel.save
 
@@ -94,7 +94,7 @@ class ChannelsController < ApplicationController
     user_ids = channel_params[:user_ids]
     ChannelUser.transaction do
       user_ids.each do |user_id|
-        ChannelUser.find_or_create_by(channel_id: @channel.id, user_id:user_id)
+        ChannelUser.find_or_create_by!(channel_id: @channel.id, user_id:user_id)
       end
     end
     respond_to do |format|

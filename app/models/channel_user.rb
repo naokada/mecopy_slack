@@ -8,10 +8,12 @@ class ChannelUser < ApplicationRecord
   after_save :channel_participate_message_generater
   after_destroy :channel_unparticipate_message_generater
 
-	def channel_participate_message_generater
-		Message.create(content: "PARTICIPATE", content_type: "participate", user_id: self.user_id, channel_id: self.channel_id)
+  scope :where_user_channel, ->(user_id, channel_id) { where(user_id: user_id, channel_id: channel_id) }
+
+  def channel_participate_message_generater
+    Message.create(content: "PARTICIPATE", content_type: "participate", user_id: user_id, channel_id: channel_id)
   end
   def channel_unparticipate_message_generater
-		Message.create(content: "UNPARTICIPATE", content_type: "unparticipate", user_id: self.user_id, channel_id: self.channel_id)
-	end
+    Message.create(content: "UNPARTICIPATE", content_type: "unparticipate", user_id: user_id, channel_id: channel_id)
+  end
 end
