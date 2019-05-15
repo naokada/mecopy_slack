@@ -514,7 +514,7 @@ html, body {
         i {
             font-size: 1.5rem;
             top: -42px;
-            margin-left: 3px;
+            margin: 0 0 0 3px;
         }
     }
     &__list {
@@ -779,8 +779,6 @@ span.gray {
 
 .nav {
     &__contents {
-        // min-width: 200px;
-        // max-width: 360px;
         width: 240px;
         border: 1px solid $border_cl;
         border-radius: 6px;

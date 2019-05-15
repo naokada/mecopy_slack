@@ -10,8 +10,7 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
-    grouped_contents = @channel.messages.includes(:user).order('created_at DESC')
-    @grouped_contents = grouped_contents.group_by{|u| u.created_at.strftime('%Y/%m/%d')}
+    @grouped_contents = @channel.messages.includes(:user).grouped_by_date
     @message = Message.new
   end
 
@@ -29,9 +28,8 @@ class ChannelsController < ApplicationController
 
   def search
     @channels = Channel.where('name LIKE(?)', "%#{params[:keyword]}%")
-    @current_user_channels_ids = current_user.channels.ids
-    @joined_channels = Channel.where id: @channels.ids & @current_user_channels_ids
-    @unjoined_channels = Channel.where id: @channels.ids - @current_user_channels_ids
+    @joined_channels = @channels.joined(current_user.id)
+    @unjoined_channels = @channels.unjoined(current_user.id)
     respond_to do |format|
       format.html
       format.json { render 'search', json: [@unjoined_channels, @joined_channels] }

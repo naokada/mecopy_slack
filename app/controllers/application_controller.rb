@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
 
 	def layout_by_resource
 		if devise_controller?
-		"devise_layout"
+			"devise_layout"
 		else
-		"application"
+			"application"
 		end
 	end
 
@@ -23,17 +23,17 @@ class ApplicationController < ActionController::Base
 	end
 
 	def set_channels
-    @joined_channels = current_user.channels
+		@joined_channels = current_user.channels
 		@directs = current_user.directs.normal
 		@self_dm = current_user.directs.self_dm.first
 	end
 
 	private
-    def set_time_zone(&block)
-      Time.use_zone(current_user.time_zone, &block)
-    end
+	def set_time_zone(&block)
+		Time.use_zone(current_user.time_zone, &block)
+	end
 
-    def user_time_zone_present?
-      current_user.try(:time_zone).present?
-    end
+	def user_time_zone_present?
+		current_user.try(:time_zone).present?
+	end
 end
